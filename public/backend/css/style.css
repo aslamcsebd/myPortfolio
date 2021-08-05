@@ -135,4 +135,7 @@ legend {
        outline: unset !important;
    }
 .capitalize{ text-transform: capitalize; }
+.justify{text-align: justify !important;}
+.alert:first-letter{text-transform: uppercase !important;}
+
 .hide{ display: none; }                                                                                       

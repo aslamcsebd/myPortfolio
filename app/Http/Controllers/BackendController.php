@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 use Validator;
 use Redirect;
+use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\ProfilePicture;
 use App\Models\SocialSite;
+use App\Models\Home;
+use Illuminate\Support\Facades\Schema;
 
 class BackendController extends Controller {
 	
@@ -19,7 +22,7 @@ class BackendController extends Controller {
 
    public function addPicture(Request $request){
       $validator = Validator::make($request->all(),[
-         'profilePicture'=>'required'
+         'image'=>'required'
       ]);
 
       if($validator->fails()){
@@ -28,15 +31,15 @@ class BackendController extends Controller {
       }
 
       $path="profilePicture/";
-      if ($request->hasFile('profilePicture')){
-         if($files=$request->file('profilePicture')){
-            $picture = $request->profilePicture;
+      if ($request->hasFile('image')){
+         if($files=$request->file('image')){
+            $picture = $request->image;
             $fullName=time().".".$picture->getClientOriginalExtension();
             $files->move(imagePath($path), $fullName);
             $imageLink = imagePath($path). $fullName;
 
             ProfilePicture::insert([
-               'profilePicture'=>$imageLink,
+               'image'=>$imageLink,
                'status'=>1,
                'created_at' => Carbon::now()
             ]);
@@ -45,20 +48,6 @@ class BackendController extends Controller {
       }else{
          return back()->with('fail','Sorry! Image add Fail..');
       }     
-   }
-
-   public function pictureStatus($id, $tab){
-      $pictureId = ProfilePicture::find($id);
-      ($pictureId->status == true) ? $pictureId->status = false : $pictureId->status = true;     
-      $pictureId->save();  
-      return back()->with('success','Profile picture status change')->withInput(['tab' => $tab]);
-   }
-
-   public function pictureDelete($id, $tab){
-      $imageId = ProfilePicture::where('id', $id)->first();
-      unlink($imageId->profilePicture);
-      ProfilePicture::find($id)->delete();
-      return back()->with('success','Profile picture delete successfully')->withInput(['tab' => $tab]);
    }
 
    public function addSocialSite(Request $request){
@@ -83,13 +72,6 @@ class BackendController extends Controller {
       return back()->with('success','Social site add successfully')->withInput(['tab' => 'socialSite']);
    }
 
-   public function socialStatus($id, $tab){
-      $pictureId = SocialSite::find($id);
-      ($pictureId->status == true) ? $pictureId->status = false : $pictureId->status = true;     
-      $pictureId->save();  
-      return back()->with('success','Social site status change')->withInput(['tab' => $tab]);
-   }
-
    public function editSocialSite(Request $request){
       $validator = Validator::make($request->all(),[
          'socialName'=>'required|unique:social_sites,socialName',
@@ -107,18 +89,88 @@ class BackendController extends Controller {
       ]);
       return back()->with('success','Social site edit successfully')->withInput(['tab' => $request->tab]);
    }
-
-   public function socialDelete($id, $tab){
-      SocialSite::find($id)->delete();
-      return back()->with('success','Social site delete successfully')->withInput(['tab' => $tab]);
-   }
    
 // Home
-
    public function home(){
-      return view('backend.pages.home');
+      $data['Home'] = Home::all();
+      return view('backend.pages.home', $data);
    }
 
+   public function addHome(Request $request){
+      $validator = Validator::make($request->all(),[
+         'image'=>'required',
+         'firstTitle'=>'required',
+         'secondTitle'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      $path="home/";
+      if ($request->hasFile('image')){
+         if($files=$request->file('image')){
+            $picture = $request->image;
+            $fullName=time().".".$picture->getClientOriginalExtension();
+            $files->move(imagePath($path), $fullName);
+            $imageLink = imagePath($path). $fullName;
+
+            Home::insert([
+               'image'=>$imageLink,
+               'firstTitle'=>$request->firstTitle,
+               'secondTitle'=>$request->secondTitle,
+               'status'=>1,
+               'created_at' => Carbon::now()
+            ]);
+         }
+         return back()->with('success','Homes\'s image add successfully');
+      }else{
+         return back()->with('fail','Sorry! Homes\'s image add fail..');
+      }     
+   }
+
+   public function editHome(){
+      $data['Home'] = Home::find($_REQUEST['id']);
+      return view('backend.pages.ajaxView', $data);
+   }
+
+   public function editHome2(Request $request){
+      $validator = Validator::make($request->all(),[
+         'firstTitle'=>'required',
+         'secondTitle'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      $path="home/";
+      if ($request->hasFile('image')){
+         if($files=$request->file('image')){
+            $picture = $request->image;
+            $fullName=time().".".$picture->getClientOriginalExtension();
+            $files->move(imagePath($path), $fullName);
+            $imageLink = imagePath($path). $fullName;
+
+            Home::where('id', $request->id)->update([
+               'image'=>$imageLink,
+               'firstTitle'=>$request->firstTitle,
+               'secondTitle'=>$request->secondTitle,
+            ]);
+            unlink($request->oldImage);
+         }
+      }else{
+         Home::where('id', $request->id)->update([
+            'firstTitle'=>$request->firstTitle,
+            'secondTitle'=>$request->secondTitle,
+         ]);
+      }
+      return back()->with('success','Homes\'s image edit successfully');
+   }
+
+
+// About
    public function about(){
       return view('backend.pages.about');
    }
@@ -149,6 +201,25 @@ class BackendController extends Controller {
 
    public function contact(){
       return view('backend.pages.contact');
+   }
+   
+// Status [Active vs Inactive]
+   public function itemStatus($id, $model, $tab){
+      //Much code because save() function not working...
+      $itemId = DB::table($model)->find($id);
+      ($itemId->status == true) ? $action=$itemId->status = false : $action=$itemId->status = true;     
+      DB::table($model)->where('id', $id)->update(['status' => $action]);
+      return back()->with('success', $model.' status change')->withInput(['tab' => $tab]);
+   }
+
+// Delete
+   public function itemDelete($id, $model, $tab){
+      $itemId = DB::table($model)->find($id);
+      if (Schema::hasColumn($model, 'image')){
+         unlink($itemId->image);
+      }
+      DB::table($model)->where('id', $id)->delete();
+      return back()->with('success', $model.' delete successfully')->withInput(['tab' => $tab]);
    }
    
 }

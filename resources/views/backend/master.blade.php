@@ -10,7 +10,7 @@
          @yield('content')
       @include('backend.includes.modal')
       @include('backend.includes.footer')
-      @yield('js')
+         @yield('js')
    
    </body>
 </html>

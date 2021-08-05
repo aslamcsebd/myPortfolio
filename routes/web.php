@@ -33,8 +33,13 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::post('editSocialSite/', 'BackendController@editSocialSite')->name('editSocialSite');       
       Route::get('socialDelete/{id}/{tab}','BackendController@socialDelete')->name('socialDelete');        
 
+   // home
+      Route::get('home/', 'BackendController@home')->name('home');
+      Route::post('addHome/', 'BackendController@addHome')->name('addHome');
+      Route::get('editHome/', 'BackendController@editHome')->name('editHome');       
+      Route::post('editHome2/', 'BackendController@editHome2')->name('editHome2');       
 
-   Route::get('home/', 'BackendController@home')->name('home');
+
    Route::get('about/', 'BackendController@about')->name('about');
    Route::get('services/', 'BackendController@services')->name('services');
    Route::get('skills/', 'BackendController@skills')->name('skills');
@@ -43,4 +48,9 @@ Route::get('/', 'FrontendController@index')->name('home');
    Route::get('work/', 'BackendController@work')->name('work');
    Route::get('blog/', 'BackendController@blog')->name('blog');
    Route::get('contact/', 'BackendController@contact')->name('contact');
+
+// All status change
+   
+   Route::get('itemStatus/{id}/{model}/{tab}','BackendController@itemStatus')->name('itemStatus');
+   Route::get('itemDelete/{id}/{model}/{tab}','BackendController@itemDelete')->name('itemDelete');
    

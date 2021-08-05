@@ -16,6 +16,10 @@
    
    {{-- dataTables --}}
    <script src="{{ asset('js/dataTables.min.js') }}"></script>
+
+   <!-- summernote -->
+   <script src="{{ asset('/') }}summernote/summernote.min.js" ></script>
+  
    
    <script type="text/javascript">
       // if ($(window).width() > 992) {
@@ -42,7 +46,11 @@
           $(".alert").fadeTo(500, 0).slideUp(500, function(){
               $(this).remove(); 
           });
-      }, 5000);      
+      }, 5000);
+
+      $(document).ready(function() {
+        $('.summernote').summernote();
+      });    
       
       //redirect to specific tab
       $(document).ready(function () {

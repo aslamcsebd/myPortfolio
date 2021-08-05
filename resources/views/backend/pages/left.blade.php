@@ -1,8 +1,10 @@
 @extends('backend.master')
+@section('title') 
+   Left side
+@endsection
 
 @section('content')
    @include('common.alertMessage')
-
    <div class="content-wrapper p-3">
       <div class="btn-group mb-2" role="group" aria-label="Basic example"> 
          <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addImage">Add Image</button>
@@ -34,20 +36,20 @@
                         <th>Action</th>
                      </thead>
                      <tbody>
-                        @foreach($ProfilePicture as $picture)
+                        @foreach($ProfilePicture as $item)
                            <tr>
                               <td width="5%">{{$loop->iteration}}</td>                              
-                              <td class="p-2"><img src="{{$picture->profilePicture}}" width="120" height="100"></td>
+                              <td class="p-2"><img src="{{$item->image}}" width="120" height="100"></td>
                               <td width="8%">
-                                 @if($picture->status == 1)
-                                    <a href="{{ url('pictureStatus', [$picture->id, 'image'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
+                                 @if($item->status == 1)
+                                    <a href="{{ url('itemStatus', [$item->id, 'profile_pictures', 'image'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
                                  @else
-                                    <a href="{{ url('pictureStatus', [$picture->id, 'image'])}}" class="btn px-1 btn-sm btn-danger" title="Click for active">Inactive</a>
+                                    <a href="{{ url('itemStatus', [$item->id, 'profile_pictures', 'image'])}}" class="btn px-1 btn-sm btn-danger" title="Click for active">Inactive</a>
                                  @endif
                               </td>
                               <td width="8%">
                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn btn-sm btn-danger text-light" href="{{ url('pictureDelete', [$picture->id, 'image'])}}" onclick="return confirm('Are you want to delete this?')">Delete</a>
+                                    <a class="btn btn-sm btn-danger text-light" href="{{ url('itemDelete', [$item->id, 'profile_pictures', 'image'])}}" onclick="return confirm('Are you want to delete this?')">Delete</a>
                                  </div>
                               </td>
                            </tr> 
@@ -68,30 +70,30 @@
                         <th>Action</th>
                      </thead>
                      <tbody>
-                        @foreach($SocialSite as $social)
+                        @foreach($SocialSite as $item)
                            <tr>
                               <td width="7%">{{$loop->iteration}}</td>
                               <td>
-                                 <a href='{{ url($social->socialUrl) }}' target="_blank">{!! $social->socialLogo !!}</a>
+                                 <a href='{{ url($item->socialUrl) }}' target="_blank">{!! $item->socialLogo !!}</a>
                               </td>
                               <td>
-                                 <a class="capitalize" href='{{ url($social->socialUrl) }}' target="_blank">{!! $social->socialName !!}</a>
+                                 <a class="capitalize" href='{{ url($item->socialUrl) }}' target="_blank">{!! $item->socialName !!}</a>
                               </td>
                               <td>
-                                 <a href='{{ url($social->socialUrl) }}' target="_blank">{{ $social->socialUrl }}</a>
+                                 <a href='{{ url($item->socialUrl) }}' target="_blank">{{ $item->socialUrl }}</a>
                               </td>
                               <td width="8%">
-                                 @if($social->status == 1)
-                                    <a href="{{ url('socialStatus', [$social->id, 'socialSite'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
+                                 @if($item->status == 1)
+                                    <a href="{{ url('itemStatus', [$item->id, 'social_sites', 'socialSite'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
                                  @else
-                                    <a href="{{ url('socialStatus', [$social->id, 'socialSite'])}}" class="btn px-1 btn-sm btn-danger" title="Click for active">Inactive</a>
+                                    <a href="{{ url('itemStatus', [$item->id, 'social_sites', 'socialSite'])}}" class="btn px-1 btn-sm btn-danger" title="Click for active">Inactive</a>
                                  @endif
                               </td>
                               <td width="15%">
                                  <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn btn-sm btn-success text-light" data-toggle="modal" data-target="#editSocialSite" data-id="{{$social->id}}" data-name="{{$social->socialName}}" data-url="{{$social->socialUrl}}" data-tab="socialSite">Edit</a>
+                                    <a class="btn btn-sm btn-success text-light" data-toggle="modal" data-target="#editSocialSite" data-id="{{$item->id}}" data-name="{{$item->socialName}}" data-url="{{$item->socialUrl}}" data-tab="socialSite">Edit</a>
                                     
-                                    <a class="btn btn-sm btn-danger text-light" href="{{ url('socialDelete', [$social->id, 'socialSite'])}}" onclick="return confirm('Are you want to delete this?')">Delete</a>
+                                    <a class="btn btn-sm btn-danger text-light" href="{{ url('itemDelete', [$item->id, 'social_sites', 'socialSite'])}}" onclick="return confirm('Are you want to delete this?')">Delete</a>
                                  </div>
                               </td>
                            </tr> 
@@ -120,8 +122,8 @@
                      @csrf                   
                      <div class="form">
                         <div class="form-group">
-                           <label for="profilePicture">Profile picture :</label>
-                           <input type="file" class="form-control" id="profilePicture" name="profilePicture" required>
+                           <label for="image">Profile picture :</label>
+                           <input type="file" class="form-control" id="image" name="image" required>
                         </div>
                      </div>
                      <div class="modal-footer">

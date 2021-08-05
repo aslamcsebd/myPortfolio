@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" >
-   <a href="index.html" class="brand-link bbg-light">
+   <a href="{{url('/admin')}}" class="brand-link bbg-light">
       <i lass="nav-icon fas fa-school"></i>
       <span class="brand-text font-weight-light text-center pl-2">Victory Loves Preparation</span>
    </a>
@@ -14,13 +14,13 @@
             </li>
             <li class="nav-item as-treeview">
                <a href="{{ route('home') }}" class="nav-link {{ (request()->routeIs('home*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-home"></i>
                   <p>Home</p>
                </a>
             </li>
             <li class="nav-item as-treeview">
                <a href="{{ route('about') }}" class="nav-link {{ (request()->routeIs('about*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon far fa-address-card"></i>
                   <p>About</p>
                </a>
             </li>

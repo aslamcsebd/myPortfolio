@@ -7,7 +7,7 @@
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight" style="">
 			<div class="text-center">
 				<img class="author-img" 
-					src="{{ !empty($profilePicture->profilePicture) ? $profilePicture->profilePicture:
+					src="{{ !empty($profilePicture->image) ? $profilePicture->image:
 						'public/images/profilePicture/default.jpg' }}" alt="Image not found">
 				<h1 id="colorlib-logo"><a href="#">Md Aslam Hossain</a></h1>
 				<span class="position"><a href="#">Full stack developer</a> in Bangladesh</span>
@@ -46,38 +46,23 @@
 			<section id="colorlib-hero" class="js-fullheight" data-section="home">
 				<div class="flexslider js-fullheight">
 					<ul class="slides">
-						<li style="background-image: url({{asset('/')}}frontend/images/img_bg_1.jpg);">
-							<div class="overlay"></div>
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-										<div class="slider-text-inner js-fullheight">
-											<div class="desc">
-												<h1>Hi! <br>I'm Aslam</h1>
-												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-												<p><a class="btn btn-primary btn-learn">Download CV <i class="icon-download4"></i></a></p>
+						@foreach($Home as $item)
+							<li style="background-image: url({{$item->image}});">
+								<div class="overlay"></div>
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+											<div class="slider-text-inner js-fullheight">
+												<div class="desc">
+													<h1>{!!$item->firstTitle!!}</h1>
+													<h2>{!!$item->secondTitle!!}</h2>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</li>
-						<li style="background-image: url({{asset('/')}}frontend/images/img_bg_2.jpg);">
-							<div class="overlay"></div>
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-										<div class="slider-text-inner">
-											<div class="desc">
-												<h1>I am <br>a Designer</h1>
-												<h2>100% html5 bootstrap templates Made by <a href="https://colorlib.com/" target="_blank">colorlib.com</a></h2>
-												<p><a class="btn btn-primary btn-learn">View Portfolio <i class="icon-briefcase3"></i></a></p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>					
+							</li>
+						@endforeach
 					</ul>
 				</div>
 			</section>

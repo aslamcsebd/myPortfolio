@@ -1,5 +1,7 @@
 @extends('backend.master')
-
+@section('title')
+   Portfolio Admin
+@endsection
 @section('content')   
    <div class="content-wrapper">
       <div class="content-header">

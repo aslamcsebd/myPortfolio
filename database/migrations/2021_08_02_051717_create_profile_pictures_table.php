@@ -15,7 +15,7 @@ class CreateProfilePicturesTable extends Migration
     {
         Schema::create('profile_pictures', function (Blueprint $table) {
             $table->id();
-            $table->string('profilePicture', 50);
+            $table->string('image', 50);
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
