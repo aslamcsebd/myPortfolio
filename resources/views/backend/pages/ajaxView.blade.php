@@ -1,5 +1,6 @@
+
 @if(isset($Home))
-   <form action="{{ url('editHome2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+   <form action="{{ url('editService2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
       @csrf                   
       <div class="form">
          <div class="form-group row">
@@ -32,6 +33,36 @@
    </form>   
 @endif
 
+@if(isset($Service))
+   <form action="{{ url('editService2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+      @csrf
+      <div class="form row">
+         <input  name="id" value="{{$Service->id}}" hidden>
+         <div class="form-group col-5">
+            <label for="title">Service name :</label>
+            <input name="title" class="form-control" id="title" value="{{$Service->title}}" type="text" placeholder="Ex: Web Design..." required>
+         </div>
+         <div class="form-group col">
+            <label for="logo">Service logo :</label>
+            <input type="text" name="logo" id="logo" value="{{$Service->logo}}" class="form-control mb-2" placeholder="<i class='fa fa-name'></i>" required>                       
+            <a class="btn-sm btn-success" href="https://fontawesome.com/" target="_blank">Search Font</a>
+         </div>
+      <small class="bg-info p-1 ml-2">Example : Innovative Ideas, Graphic Design, Web Design, Software, Application etc</small>         
+      </div>
+      <div class="form">
+         <div class="form-group">
+            <label for="description" class="mb-2">Description :</label>
+            <textarea type="text" id="description" class="form-control summernote" name="description" placeholder="Example : www.facebook.com/userName" required>{{$Service->description}}</textarea>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <div class="btn-group">
+            <button class="btn btn-sm btn-primary">Edit now</button>
+            <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </form>   
+@endif
 
 <!-- summernote -->
 <script src="{{ asset('/') }}summernote/summernote.min.js" ></script>

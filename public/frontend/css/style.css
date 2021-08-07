@@ -715,7 +715,7 @@ body.offcanvas {
     .services .desc h3 {
       font-size: 16px;
       font-weight: 700;
-      text-transform: uppercase; }
+      text-transform: capitalize; }
   .services.color-2 .icon {
     background: #ec5453; }
     .services.color-2 .icon:before {

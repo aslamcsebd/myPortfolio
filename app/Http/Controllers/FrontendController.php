@@ -8,7 +8,7 @@ use App\Models\ProfilePicture;
 use App\Models\SocialSite;
 use App\Models\Home;
 use App\Models\About;
-use App\Models\service;
+use App\Models\Service;
 
 class FrontendController extends Controller{
    
@@ -17,6 +17,7 @@ class FrontendController extends Controller{
       $data['SocialSite'] = SocialSite::all();
       $data['Home'] = Home::where('status', 1)->get();
       $data['aboutMe'] = AnyTitle::where('title', 'aboutMe')->first();
+      $data['Service'] = Service::where('status', 1)->get();
 
       return view('frontend.index', $data);
    }

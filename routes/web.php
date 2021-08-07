@@ -25,13 +25,14 @@ Route::get('/', 'FrontendController@index')->name('home');
       // profile image
       Route::get('left/', 'BackendController@left')->name('left');
       Route::post('addPicture/', 'BackendController@addPicture')->name('addPicture');
-      Route::get('pictureStatus/{id}/{tab}','BackendController@pictureStatus')->name('pictureStatus');        
-      Route::get('pictureDelete/{id}/{tab}','BackendController@pictureDelete')->name('pictureDelete');        
+      Route::get('pictureStatus/{id}/{tab}', 'BackendController@pictureStatus')->name('pictureStatus');        
+      Route::get('pictureDelete/{id}/{tab}', 'BackendController@pictureDelete')->name('pictureDelete');        
+      
       // Social site
       Route::post('addSocialSite/', 'BackendController@addSocialSite')->name('addSocialSite');
-      Route::get('socialStatus/{id}/{tab}','BackendController@socialStatus')->name('socialStatus');
+      Route::get('socialStatus/{id}/{tab}', 'BackendController@socialStatus')->name('socialStatus');
       Route::post('editSocialSite/', 'BackendController@editSocialSite')->name('editSocialSite');       
-      Route::get('socialDelete/{id}/{tab}','BackendController@socialDelete')->name('socialDelete');        
+      Route::get('socialDelete/{id}/{tab}', 'BackendController@socialDelete')->name('socialDelete');        
 
    // home
       Route::get('home/', 'BackendController@home')->name('home');
@@ -39,9 +40,16 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editHome/', 'BackendController@editHome')->name('editHome');       
       Route::post('editHome2/', 'BackendController@editHome2')->name('editHome2');       
 
+   //About
+      Route::get('about/', 'BackendController@about')->name('about');
 
-   Route::get('about/', 'BackendController@about')->name('about');
-   Route::get('services/', 'BackendController@services')->name('services');
+   //Service
+      Route::get('services/', 'BackendController@services')->name('services');
+      Route::post('addService/', 'BackendController@addService')->name('addService');
+      Route::get('editService/', 'BackendController@editService')->name('editService');       
+      Route::post('editService2/', 'BackendController@editService2')->name('editService2');       
+
+   
    Route::get('skills/', 'BackendController@skills')->name('skills');
    Route::get('education/', 'BackendController@education')->name('education');
    Route::get('experience/', 'BackendController@experience')->name('experience');
@@ -49,8 +57,8 @@ Route::get('/', 'FrontendController@index')->name('home');
    Route::get('blog/', 'BackendController@blog')->name('blog');
    Route::get('contact/', 'BackendController@contact')->name('contact');
 
-// All status change
-   
+
+// All status change   
    Route::get('itemStatus/{id}/{model}/{tab}','BackendController@itemStatus')->name('itemStatus');
    Route::get('itemDelete/{id}/{model}/{tab}','BackendController@itemDelete')->name('itemDelete');
    

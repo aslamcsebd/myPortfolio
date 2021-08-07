@@ -12,7 +12,7 @@ use App\Models\ProfilePicture;
 use App\Models\SocialSite;
 use App\Models\Home;
 use App\Models\About;
-use App\Models\service;
+use App\Models\Service;
 
 class BackendController extends Controller {
 	
@@ -175,13 +175,67 @@ class BackendController extends Controller {
 // About
    public function about(){
       $data['AnyTitle'] = AnyTitle::where('title', 'aboutMe')->first();
-      $data['About'] = About::all();
       return view('backend.pages.about', $data);
    }
 
+// Service
    public function services(){
-      return view('backend.pages.services');
+      $data['Service'] = Service::all();
+      return view('backend.pages.services', $data);
    }
+
+   public function addService(Request $request){
+      $validator = Validator::make($request->all(),[
+         'title'=>'required',
+         'logo'=>'required',
+         'description'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Service::insert([
+         'title'=>$request->title,
+         'logo'=>$request->logo,
+         'description'=>$request->description,
+         'status'=>1,
+         'created_at' => Carbon::now()
+      ]);
+         
+      return back()->with('success', 'Service add successfully');
+           
+   }
+
+   public function editService(){
+      $data['Service'] = Service::find($_REQUEST['id']);
+      return view('backend.pages.ajaxView', $data);
+   }
+
+   public function editService2(Request $request){
+      $validator = Validator::make($request->all(),[
+         'title'=>'required',
+         'logo'=>'required',
+         'description'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Service::where('id', $request->id)->update([
+         'title'=>$request->title,
+         'logo'=>$request->logo,
+         'description'=>$request->description
+      ]);
+      return back()->with('success','Service edit successfully');
+   }
+
+
+
+
 
    public function skills(){
       return view('backend.pages.skills');

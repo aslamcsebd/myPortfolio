@@ -27,7 +27,7 @@
 
             <li class="nav-item as-treeview">
                <a href="{{ route('services') }}" class="nav-link {{ (request()->routeIs('services*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fa fa-wrench"></i>
                   <p>Services</p>
                </a>
             </li>
