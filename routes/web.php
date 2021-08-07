@@ -54,3 +54,6 @@ Route::get('/', 'FrontendController@index')->name('home');
    Route::get('itemStatus/{id}/{model}/{tab}','BackendController@itemStatus')->name('itemStatus');
    Route::get('itemDelete/{id}/{model}/{tab}','BackendController@itemDelete')->name('itemDelete');
    
+// Any title
+   Route::post('addAnyTitle/', 'BackendController@addAnyTitle')->name('addAnyTitle');
+   Route::post('editAnyTitle/', 'BackendController@editAnyTitle')->name('editAnyTitle');

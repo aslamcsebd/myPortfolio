@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Schema;
 use Validator;
 use Redirect;
 use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\AnyTitle;
 use App\Models\ProfilePicture;
 use App\Models\SocialSite;
 use App\Models\Home;
-use Illuminate\Support\Facades\Schema;
+use App\Models\About;
+use App\Models\service;
 
 class BackendController extends Controller {
 	
@@ -169,10 +172,11 @@ class BackendController extends Controller {
       return back()->with('success','Homes\'s image edit successfully');
    }
 
-
 // About
    public function about(){
-      return view('backend.pages.about');
+      $data['AnyTitle'] = AnyTitle::where('title', 'aboutMe')->first();
+      $data['About'] = About::all();
+      return view('backend.pages.about', $data);
    }
 
    public function services(){
@@ -221,5 +225,41 @@ class BackendController extends Controller {
       DB::table($model)->where('id', $id)->delete();
       return back()->with('success', $model.' delete successfully')->withInput(['tab' => $tab]);
    }
-   
+
+//Any title
+   public function addAnyTitle(Request $request){
+      $validator = Validator::make($request->all(),[
+         'description'=>'required',
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      AnyTitle::insert([
+         'title'=>$request->title,
+         'description'=>$request->description,
+         'status'=>1,
+         'created_at' => Carbon::now()
+      ]);
+      return back()->with('success', $request->title.' add successfully')->withInput(['tab' => $request->tab]);
+   }
+
+   public function editAnyTitle(Request $request){
+      $validator = Validator::make($request->all(),[
+         'description'=>'required',
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      AnyTitle::where('id', $request->id)->update([
+         'description'=>$request->description
+      ]);
+      return back()->with('success', $request->title.' update successfully')->withInput(['tab' => $request->tab]);
+   }
+
 }

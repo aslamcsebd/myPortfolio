@@ -11,7 +11,7 @@ class HomeController extends Controller{
         $this->middleware('auth');
     }
 
-    public function index()
+    public function admin()
     {
         return view('backend.index');
     }
