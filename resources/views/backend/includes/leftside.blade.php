@@ -39,7 +39,7 @@
             </li>
             <li class="nav-item as-treeview">
                <a href="{{ route('education') }}" class="nav-link {{ (request()->routeIs('education*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-user-graduate"></i>
                   <p>Education</p>
                </a>
             </li>

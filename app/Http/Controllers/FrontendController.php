@@ -9,6 +9,7 @@ use App\Models\SocialSite;
 use App\Models\Home;
 use App\Models\About;
 use App\Models\Service;
+use App\Models\Skill;
 
 class FrontendController extends Controller{
    
@@ -19,6 +20,8 @@ class FrontendController extends Controller{
       $data['aboutMe'] = AnyTitle::where('title', 'aboutMe')->first();
       $data['Service'] = Service::where('status', 1)->get();
 
+      $data['aboutSkill'] = AnyTitle::where('title', 'aboutSkill')->first();
+      $data['Skill'] = Skill::where('status', 1)->get();
       return view('frontend.index', $data);
    }
 }

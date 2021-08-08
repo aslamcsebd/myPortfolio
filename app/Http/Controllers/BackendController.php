@@ -13,6 +13,7 @@ use App\Models\SocialSite;
 use App\Models\Home;
 use App\Models\About;
 use App\Models\Service;
+use App\Models\Skill;
 
 class BackendController extends Controller {
 	
@@ -209,6 +210,7 @@ class BackendController extends Controller {
    }
 
    public function editService(){
+      dd($_REQUEST['id']);
       $data['Service'] = Service::find($_REQUEST['id']);
       return view('backend.pages.ajaxView', $data);
    }
@@ -233,12 +235,49 @@ class BackendController extends Controller {
       return back()->with('success','Service edit successfully');
    }
 
-
-
-
-
+//Skill
    public function skills(){
-      return view('backend.pages.skills');
+      $data['AnyTitle'] = AnyTitle::where('title', 'aboutSkill')->first();
+      $data['Skill'] = Skill::all();
+      return view('backend.pages.skills', $data);
+   }
+
+   public function addSkill(Request $request){
+      $validator = Validator::make($request->all(),[
+         'title'=>'required',
+         'range'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Skill::insert([
+         'title'=>$request->title,
+         'range'=>$request->range,
+         'status'=>1,
+         'created_at' => Carbon::now()
+      ]);         
+      return back()->with('success', 'Skills add successfully');  
+   }
+
+   public function editSkill(Request $request){
+      $validator = Validator::make($request->all(),[
+         'title'=>'required',
+         'range'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Skill::where('id', $request->id)->update([
+         'title'=>$request->title,
+         'range'=>$request->range
+      ]);         
+      return back()->with('success', 'Skills update successfully');  
    }
 
    public function education(){

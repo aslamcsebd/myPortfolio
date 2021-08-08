@@ -1,4 +1,7 @@
 @extends('frontend.master')
+	@php
+		$effect = array('fadeInLeft', 'fadeInRight', 'fadeInTop', 'fadeInBottom');
+	@endphp
 @section('content')
 
 <div id="colorlib-page">
@@ -10,7 +13,7 @@
 					src="{{ !empty($profilePicture->image) ? $profilePicture->image:
 						'public/images/profilePicture/default.jpg' }}" alt="Image not found">
 				<h1 id="colorlib-logo"><a href="#">Md Aslam Hossain</a></h1>
-				<span class="position"><a href="#">Full stack developer</a> in Bangladesh</span>
+				<span class="position"><a href="https://www.google.com/search?sxsrf=ALeKk00UZVgWw4qePXzSqdfiqwFagXRyeQ:1628416336519&q=What+is+meant+by+full+stack+developer%3F&sa=X&ved=2ahUKEwj7gKPKk6HyAhV6xzgGHSZbC4YQzmd6BAgOEAU&biw=1280&bih=577&dpr=1.5" target="_blank">Full stack developer</a> in Bangladesh</span>
 			</div>
 			<nav id="colorlib-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
@@ -81,9 +84,6 @@
 								</div>
 							</div>
 							<div class="row">
-								@php
-									$effect = array('fadeInLeft', 'fadeInRight', 'fadeInTop', 'fadeInBottom');
-								@endphp
 								@foreach($Service as $item)
 									<div class="col-md-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
 										<div class="services color-{{rand(1,6)}}">
@@ -120,8 +120,8 @@
 								<div class="services color-{{rand(1,6)}}">
 									<span class="icon">{!!$item->logo!!}</span>
 									<div class="desc">
-										<h3>{{$item->title}}</h3>
-										<p class="justify">{!!$item->description!!}</p>
+										<h3 class="bg-info mb-0">{{$item->title}}</h3>
+										<p class="bg-dark mb-0">{!!$item->description!!}</p>
 									</div>
 								</div>
 							</div>
@@ -166,74 +166,22 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
+							<p>{!!$aboutSkill->description!!}</p>
 						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>Photoshop</h3>
-								<div class="progress">
-									<div class="progress-bar color-1" role="progressbar" aria-valuenow="75"
-										aria-valuemin="0" aria-valuemax="100" style="width:75%">
-										<span>75%</span>
+
+						@foreach($Skill as $item)
+							<div class="col-md-6 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
+								<div class="progress-wrap">
+									<h3>{{$item->title}}</h3>
+									<div class="progress">
+										<div class="progress-bar color-{{rand(1,6)}}" role="progressbar" aria-valuenow="{{$item->range}}"
+											aria-valuemin="0" aria-valuemax="100" style="width:{{$item->range}}%">
+											<span>{{$item->range}}%</span>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>jQuery</h3>
-								<div class="progress">
-									<div class="progress-bar color-2" role="progressbar" aria-valuenow="60"
-										aria-valuemin="0" aria-valuemax="100" style="width:60%">
-										<span>60%</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>HTML5</h3>
-								<div class="progress">
-									<div class="progress-bar color-3" role="progressbar" aria-valuenow="85"
-										aria-valuemin="0" aria-valuemax="100" style="width:85%">
-										<span>85%</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>CSS3</h3>
-								<div class="progress">
-									<div class="progress-bar color-4" role="progressbar" aria-valuenow="90"
-										aria-valuemin="0" aria-valuemax="100" style="width:90%">
-										<span>90%</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="progress-wrap">
-								<h3>WordPress</h3>
-								<div class="progress">
-									<div class="progress-bar color-5" role="progressbar" aria-valuenow="70"
-										aria-valuemin="0" aria-valuemax="100" style="width:70%">
-										<span>70%</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="progress-wrap">
-								<h3>SEO</h3>
-								<div class="progress">
-									<div class="progress-bar color-6" role="progressbar" aria-valuenow="80"
-										aria-valuemin="0" aria-valuemax="100" style="width:80%">
-										<span>80%</span>
-									</div>
-								</div>
-							</div>
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</section>

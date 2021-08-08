@@ -49,8 +49,11 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editService/', 'BackendController@editService')->name('editService');       
       Route::post('editService2/', 'BackendController@editService2')->name('editService2');       
 
-   
-   Route::get('skills/', 'BackendController@skills')->name('skills');
+   //Skill
+      Route::get('skills/', 'BackendController@skills')->name('skills');
+      Route::post('addSkill/', 'BackendController@addSkill')->name('addSkill');
+      Route::post('editSkill/', 'BackendController@editSkill')->name('editSkill');           
+
    Route::get('education/', 'BackendController@education')->name('education');
    Route::get('experience/', 'BackendController@experience')->name('experience');
    Route::get('work/', 'BackendController@work')->name('work');
