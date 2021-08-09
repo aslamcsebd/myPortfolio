@@ -2,15 +2,12 @@
 @section('title') 
    About
 @endsection
-   <style type="text/css">
-      .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{ display: none; }
-   </style>
 @section('content')
    @include('common.alertMessage')
    <div class="content-wrapper p-3">
       
       <div class="card border border-danger">
-         <div class="card-body p-1">
+         <div class="card-body p-1 dataTableHide">
             <p class="bg-success text-center pb-1 mb-2">About me</p>
             @if($AnyTitle)
                <table class="table table-bordered mb-3">
@@ -45,7 +42,7 @@
                </form>
             @else
                <form action="{{ url('addAnyTitle') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
-                  @csrf                   
+                  @csrf      
                   <div class="form">
                      <div class="form-group">
                         <input type="text" name="title" value="aboutMe" hidden>

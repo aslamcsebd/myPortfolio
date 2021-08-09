@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item as-treeview">
                <a href="{{ route('skills') }}" class="nav-link {{ (request()->routeIs('skills*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-chart-line"></i>
                   <p>Skills</p>
                </a>
             </li>

@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
    <head>
       @include('backend.includes.head')
+      @yield('css')
    </head>
    <body class="hold-transition sidebar-mini layout-fixed">      
    

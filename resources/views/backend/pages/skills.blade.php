@@ -2,10 +2,6 @@
 @section('title') 
    Skills
 @endsection
-<style type="text/css">
-   .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate{ display: none; }
-</style>
-
 @section('content')
    @include('common.alertMessage')
    <div class="content-wrapper p-3">
@@ -64,7 +60,7 @@
                   </table>
                </div>
 
-               <div class="tab-pane fade show" id="aboutSkill">
+               <div class="tab-pane fade show dataTableHide" id="aboutSkill">
                  <p class="bg-success text-center pb-1 mb-2">About skill</p>
                   @if($AnyTitle)
                      <table class="table table-bordered mb-3">
@@ -140,8 +136,8 @@
                         </div>
                         <div class="form-group">
                            <label for="range">Skill range :</label>
-                           <input type="range" name="range" value="0" min="0" max="100" step="5" class="form-control px-0" oninput="num.value = this.value" list=mapsettings>
-                           Value : <output id="num">0</output>
+                           <input type="range" name="range" value="50" min="0" max="100" step="5" class="form-control px-0" oninput="num.value = this.value" list=mapsettings>
+                           Value : <output id="num">50</output>
                         </div>
                      </div>
                      <datalist id=mapsettings>
@@ -232,6 +228,5 @@
             modal.find('.modal-body #num').val(range);
          })
       </script>
-
 
 @endsection

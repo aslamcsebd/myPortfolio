@@ -1,4 +1,4 @@
-
+   
 @if(isset($Home))
    <form action="{{ url('editService2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
       @csrf                   
@@ -64,6 +64,41 @@
    </form>   
 @endif
 
+@if(isset($Education))
+   <form action="{{ url('editEducation2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+      @csrf
+      <div class="form">
+         <input  name="id" value="{{$Education->id}}" hidden>
+         <div class="form-group">
+            <label for="degree">Degree name :</label>
+            <input name="degree" class="form-control" id="degree" value="{{$Education->degree}}" type="text" placeholder="Ex: SSC, HSC..." required>
+         </div>
+         <div class="form-group row">
+            <div class="col">
+               <label for="date">Degree date :</label>
+               <input name="oldDate" class="form-control" id="date" value="{!! date('Y-M', strtotime($Education->date)) !!}" disabled>
+            </div>
+            <div class="col">
+               <label for="date2">Edit date : [If need]</label>
+               <input type="date" class="form-control" name="date" id="date2" />
+            </div>
+         </div>                                 
+      </div>
+      <div class="form">
+         <div class="form-group">
+            <label for="description" class="mb-2">Description :</label>
+            <textarea type="text" id="description" class="form-control summernote" name="description" placeholder="Example : www.facebook.com/userName" required>{{$Education->description}}</textarea>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <div class="btn-group">
+            <button class="btn btn-sm btn-primary">Edit now</button>
+            <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </form>
+@endif
+
 <!-- summernote -->
 <script src="{{ asset('/') }}summernote/summernote.min.js" ></script>
 <script type="text/javascript">
@@ -71,5 +106,3 @@
      $('.summernote').summernote();
    });
 </script>
-
-

@@ -21,3 +21,4 @@
    {{-- dataTables --}}
    <link rel="stylesheet" href="{{ asset('css/dataTables.min.css') }}">
    <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
+   

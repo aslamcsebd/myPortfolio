@@ -14,6 +14,7 @@ use App\Models\Home;
 use App\Models\About;
 use App\Models\Service;
 use App\Models\Skill;
+use App\Models\Education;
 
 class BackendController extends Controller {
 	
@@ -205,12 +206,10 @@ class BackendController extends Controller {
          'created_at' => Carbon::now()
       ]);
          
-      return back()->with('success', 'Service add successfully');
-           
+      return back()->with('success', 'Service add successfully'); 
    }
 
    public function editService(){
-      dd($_REQUEST['id']);
       $data['Service'] = Service::find($_REQUEST['id']);
       return view('backend.pages.ajaxView', $data);
    }
@@ -280,9 +279,65 @@ class BackendController extends Controller {
       return back()->with('success', 'Skills update successfully');  
    }
 
+// Education
    public function education(){
-      return view('backend.pages.education');
+      $data['Education'] = Education::all();
+      return view('backend.pages.education', $data);
    }
+
+   public function addEducation(Request $request){
+      $validator = Validator::make($request->all(),[
+         'degree'=>'required',
+         'date'=>'required',
+         'description'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      $date = date('Y-M-d', strtotime('01-'.$request->date));
+      
+      Education::insert([
+         'degree'=>$request->degree,
+         'date'=>$date,
+         'description'=>$request->description,
+         'status'=>1,
+         'created_at' => Carbon::now()
+      ]);         
+      return back()->with('success', 'Education add successfully');  
+   }
+
+   public function editEducation(){
+      $data['Education'] = Education::find($_REQUEST['id']);
+      return view('backend.pages.ajaxView', $data);
+   }
+
+   public function editEducation2(Request $request){
+      $validator = Validator::make($request->all(),[
+         'degree'=>'required',
+         'description'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      if ($request->date ==null) {
+         $date = $request->oldDate;
+      }else{
+         $date = $request->date;
+      }
+
+      Education::where('id', $request->id)->update([
+         'degree'=>$request->degree,
+         'date'=>$date,
+         'description'=>$request->description
+      ]);         
+      return back()->with('success', 'Education update successfully');  
+   }
+
 
    public function experience(){
       return view('backend.pages.experience');
@@ -354,5 +409,4 @@ class BackendController extends Controller {
       ]);
       return back()->with('success', $request->title.' update successfully')->withInput(['tab' => $request->tab]);
    }
-
 }

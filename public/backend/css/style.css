@@ -90,6 +90,13 @@ legend {
        text-align: center;
    }
 
+/*Datatable hide*/
+   .dataTableHide .dataTables_wrapper .dataTables_length, 
+   .dataTableHide .dataTables_wrapper .dataTables_filter,
+   .dataTableHide .dataTables_wrapper .dataTables_info, 
+   .dataTableHide .dataTables_wrapper .dataTables_processing,
+   .dataTableHide .dataTables_wrapper .dataTables_paginate{ display: none; }
+
 /*Model Form*/
    .modal-content{ background-color: #cff5ea; }
    .modal-header { padding: 0.5rem; background-color: aquamarine; }
@@ -139,4 +146,4 @@ legend {
 .justify{text-align: justify !important;}
 .alert:first-letter{text-transform: uppercase !important;}
 
-.hide{ display: none; }                                                                                       
+.hide{ display: none; }
