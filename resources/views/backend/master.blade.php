@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
    <head>
       @include('backend.includes.head')
@@ -8,10 +9,12 @@
    
       @include('backend.includes.header')
       @include('backend.includes.leftside')
-         @yield('content')
+      @yield('content')
       @include('backend.includes.modal')
+
       @include('backend.includes.footer')
-         @yield('js')
+      @yield('modal')
+      @yield('js')
    
    </body>
 </html>

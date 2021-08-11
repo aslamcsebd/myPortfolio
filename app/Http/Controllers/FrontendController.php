@@ -11,6 +11,7 @@ use App\Models\About;
 use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Education;
+use App\Models\Experience;
 
 class FrontendController extends Controller{
    
@@ -25,6 +26,8 @@ class FrontendController extends Controller{
       $data['Skill'] = Skill::where('status', 1)->get();
 
       $data['Education'] = Education::where('status', 1)->get();
+      
+      $data['Experience'] = Experience::where('status', 1)->get();
       return view('frontend.index', $data);
    }
 }

@@ -73,15 +73,9 @@
             <label for="degree">Degree name :</label>
             <input name="degree" class="form-control" id="degree" value="{{$Education->degree}}" type="text" placeholder="Ex: SSC, HSC..." required>
          </div>
-         <div class="form-group row">
-            <div class="col">
-               <label for="date">Degree date :</label>
-               <input name="oldDate" class="form-control" id="date" value="{!! date('Y-M', strtotime($Education->date)) !!}" disabled>
-            </div>
-            <div class="col">
-               <label for="date2">Edit date : [If need]</label>
-               <input type="date" class="form-control" name="date" id="date2" />
-            </div>
+         <div class="form-group">
+            <label for="date">Degree date :</label>
+            <input name="date" class="form-control datepicker" id="date" value="{!! date('Y-M', strtotime($Education->date)) !!}">
          </div>                                 
       </div>
       <div class="form">
@@ -99,10 +93,54 @@
    </form>
 @endif
 
+@if(isset($Experience))
+   <form action="{{ url('editExperience2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+      @csrf
+      <div class="form">
+         <input  name="id" value="{{$Experience->id}}" hidden>
+         <div class="form-group">
+            <label for="experience">Add experience name :</label>
+            <input type="text" name="experience" class="form-control" value="{{$Experience->experience}}" id="experience" placeholder="Ex: Front End Developer, System Analyst..." required />
+         </div>
+         <div class="form-group row">
+            <div class="col">
+               <label for="date">Start date :</label>
+               <input type="text" class="form-control datepicker" value="{{date('M-Y', strtotime($Experience->startDate))}}" name="startDate" placeholder="Month-Year" required />
+            </div>
+            <div class="col">
+               <label for="date">End date :</label>
+               <input type="text" class="form-control datepicker" value="{{date('M-Y', strtotime($Experience->endDate))}}" name="endDate" placeholder="Month-Year" required />
+            </div>
+         </div>                                    
+      </div>
+      <div class="form">
+         <div class="form-group">
+            <label for="description" class="mb-2">Description :</label>
+            <textarea type="text" id="description" class="form-control summernote" name="description" placeholder="Example : www.facebook.com/userName" required>{!!$Experience->description!!}</textarea>
+         </div>
+      </div>
+      <div class="modal-footer">
+         <div class="btn-group">
+            <button class="btn btn-sm btn-primary">Save</button>
+            <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </form>
+@endif
+
 <!-- summernote -->
-<script src="{{ asset('/') }}summernote/summernote.min.js" ></script>
+<script src="{{ asset('/') }}summernote/summernote.min.js"></script>
+<link rel="stylesheet" href="{{ asset('/')}}css/datepicker.min.css">
+<script src="{{ asset('/') }}js/datepicker.min.js"></script>
+
 <script type="text/javascript">
    $(document).ready(function() {
      $('.summernote').summernote();
+   });
+
+   $(".datepicker").datepicker({
+      format: "MM-yyyy",
+      startView: "months", 
+      minViewMode: "months"
    });
 </script>

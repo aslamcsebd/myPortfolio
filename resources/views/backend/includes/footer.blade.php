@@ -1,5 +1,5 @@
 
-<!-- jQuery -->
+   <!-- jQuery -->
    <script src="{{ asset('backend/js/jquery.min.js') }}"></script>
 
    <!-- Bootstrap v4.6.0 -->
@@ -20,8 +20,11 @@
    <!-- summernote -->
    <script src="{{ asset('/') }}summernote/summernote.min.js" ></script>
   
+   <!-- Datepicker -->
+   <script src="{{ asset('/') }}js/datepicker.min.js"></script>
    
    <script type="text/javascript">
+   
       // if ($(window).width() > 992) {
         $(window).scroll(function(){
            if ($(this).scrollTop() > 0) { //default: 40
@@ -35,26 +38,39 @@
             }   
         });
       // } // end
-   </script>
-
-   <script type="text/javascript">
-      $(document).ready( function () {
+   
+      $(document).ready(function(){
          $('.table').DataTable();
-      } );
+      });
 
-      window.setTimeout(function() {
-          $(".alert").fadeTo(500, 0).slideUp(500, function(){
-              $(this).remove(); 
-          });
+      window.setTimeout(function(){
+         $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+         });
       }, 5000);
 
-      $(document).ready(function() {
+      $(document).ready(function(){
         $('.summernote').summernote();
       });    
       
       //redirect to specific tab
-      $(document).ready(function () {
+      $(document).ready(function(){
          $('#tabMenu a[href="#{{ old('tab') }}"]').tab('show')
       });
+
+      $(".datepicker").datepicker({
+         format: "MM-yyyy",
+         startView: "months", 
+         minViewMode: "months"
+      });
+
    </script>
 
+<script type="text/javascript">
+   $(".datepicker").datepicker({
+         format: "MM-yyyy",
+         startView: "months", 
+         minViewMode: "months"
+      });
+
+</script>   

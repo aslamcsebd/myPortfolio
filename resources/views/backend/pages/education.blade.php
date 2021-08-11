@@ -1,9 +1,15 @@
 @extends('backend.master')
+
 @section('title') 
    Education
 @endsection
+
+@section('css') 
+@endsection
+
 @section('content')
    @include('common.alertMessage')
+   
    <div class="content-wrapper p-3">
       <div class="card border border-danger">
          <div class="card-header p-1">
@@ -51,7 +57,7 @@
    </div>
 @endsection
 
-@section('js')
+@section('modal')
 
    {{-- Add education --}}
       <div class="modal fade" id="addEducation" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -71,7 +77,7 @@
                         </div>
                         <div class="form-group">
                            <label for="date">Add degree date :</label>
-                           <input type="text" class="form-control" name="date" id="datepicker" placeholder="Month-Year" required />
+                           <input type="text" class="form-control datepicker" name="date" placeholder="Month-Year" required />
                         </div>                                 
                      </div>
                      <div class="form">
@@ -131,17 +137,16 @@
             });
          // function ends
          }); 
-      </script>   
+      </script>
 
-   <link rel="stylesheet" href="{{ asset('/')}}css/datepicker.min.css">
-   <script src="{{ asset('/') }}js/datepicker.min.js"></script>
+@endsection
 
+@section('js')
    <script type="text/javascript">
-      $("#datepicker").datepicker( {
-         format: "mm-yyyy",
+      $(".datepicker").datepicker({
+         format: "MM-yyyy",
          startView: "months", 
          minViewMode: "months"
       });
    </script>
-
 @endsection

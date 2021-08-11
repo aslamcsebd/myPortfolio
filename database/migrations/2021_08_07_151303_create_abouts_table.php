@@ -14,7 +14,8 @@ class CreateAboutsTable extends Migration
     public function up()
     {
         Schema::create('abouts', function (Blueprint $table) {
-            $table->id();$table->string('socialLogo', 50);
+            $table->id();
+            $table->string('socialLogo', 50);
             $table->string('title', 50);
             $table->string('logo', 150);
             $table->tinyInteger('status');

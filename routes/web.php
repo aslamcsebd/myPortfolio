@@ -60,8 +60,12 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editEducation/', 'BackendController@editEducation')->name('editEducation');           
       Route::post('editEducation2/', 'BackendController@editEducation2')->name('editEducation2');           
 
-
-   Route::get('experience/', 'BackendController@experience')->name('experience');
+   //Experience
+      Route::get('experience/', 'BackendController@experience')->name('experience');
+      Route::post('addExperience/', 'BackendController@addExperience')->name('addExperience');
+      Route::get('editExperience/', 'BackendController@editExperience')->name('editExperience');           
+      Route::post('editExperience2/', 'BackendController@editExperience2')->name('editExperience2');           
+   
    Route::get('work/', 'BackendController@work')->name('work');
    Route::get('blog/', 'BackendController@blog')->name('blog');
    Route::get('contact/', 'BackendController@contact')->name('contact');

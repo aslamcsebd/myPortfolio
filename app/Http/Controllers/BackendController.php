@@ -15,6 +15,7 @@ use App\Models\About;
 use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Education;
+use App\Models\Experience;
 
 class BackendController extends Controller {
 	
@@ -296,11 +297,10 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
-      $date = date('Y-M-d', strtotime('01-'.$request->date));
       
       Education::insert([
          'degree'=>$request->degree,
-         'date'=>$date,
+         'date'=>$request->date,
          'description'=>$request->description,
          'status'=>1,
          'created_at' => Carbon::now()
@@ -316,6 +316,7 @@ class BackendController extends Controller {
    public function editEducation2(Request $request){
       $validator = Validator::make($request->all(),[
          'degree'=>'required',
+         'date'=>'required',
          'description'=>'required'
       ]);
 
@@ -324,25 +325,72 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
 
-      if ($request->date ==null) {
-         $date = $request->oldDate;
-      }else{
-         $date = $request->date;
-      }
-
       Education::where('id', $request->id)->update([
          'degree'=>$request->degree,
-         'date'=>$date,
+         'date'=>$request->date,
          'description'=>$request->description
       ]);         
       return back()->with('success', 'Education update successfully');  
    }
 
-
+// Experience
    public function experience(){
-      return view('backend.pages.experience');
+      $data['Experience'] = Experience::all();
+      return view('backend.pages.experience', $data);
    }
 
+   public function addExperience(Request $request){
+      $validator = Validator::make($request->all(),[
+         'experience'=>'required',
+         'startDate'=>'required',
+         'endDate'=>'required',
+         'description'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Experience::insert([
+         'experience'=>$request->experience,
+         'startDate'=>$request->startDate,
+         'endDate'=>$request->endDate,
+         'description'=>$request->description,
+         'status'=>1,
+         'created_at' => Carbon::now()
+      ]);         
+      return back()->with('success', 'Experience add successfully');  
+   }
+
+   public function editExperience(){
+      $data['Experience'] = Experience::find($_REQUEST['id']);
+      return view('backend.pages.ajaxView', $data);
+   }
+
+   public function editExperience2(Request $request){
+      $validator = Validator::make($request->all(),[
+         'experience'=>'required',
+         'startDate'=>'required',
+         'endDate'=>'required',
+         'description'=>'required'
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      Experience::where('id', $request->id)->update([
+         'experience'=>$request->experience,
+         'startDate'=>$request->startDate,
+         'endDate'=>$request->endDate,
+         'description'=>$request->description
+      ]);         
+      return back()->with('success', 'Experience update successfully');  
+   }
+
+// Work
    public function work(){
       return view('backend.pages.work');
    }
