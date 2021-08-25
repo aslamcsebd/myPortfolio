@@ -12,6 +12,8 @@ use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Contact;
+use App\Models\ContactType;
 
 class FrontendController extends Controller{
    
@@ -23,11 +25,13 @@ class FrontendController extends Controller{
       $data['Service'] = Service::where('status', 1)->get();
 
       $data['aboutSkill'] = AnyTitle::where('title', 'aboutSkill')->first();
-      $data['Skill'] = Skill::where('status', 1)->get();
+      $data['Skill'] = Skill::where('status', 1)->orderBy('orderBy')->get();
 
       $data['Education'] = Education::where('status', 1)->get();
       
       $data['Experience'] = Experience::where('status', 1)->get();
+
+      $data['ContactType'] = ContactType::where('status', 1)->orderBy('orderBy')->get();
       return view('frontend.index', $data);
    }
 }

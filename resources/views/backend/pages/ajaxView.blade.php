@@ -128,6 +128,19 @@
    </form>
 @endif
 
+@if(isset($Contact))
+   <div class="form">
+      <div class="form-group">
+         <label>Name :</label> {{$Contact->name}} <br>
+         <label>Email :</label> {{$Contact->email}}  <br>        
+         <label>Subject :</label> {{$Contact->subject}} <br>
+      
+         <label>Message :</label>
+         <p class="justify">{{$Contact->message}}</p>
+      </div>
+   </div>
+@endif
+
 <!-- summernote -->
 <script src="{{ asset('/') }}summernote/summernote.min.js"></script>
 <link rel="stylesheet" href="{{ asset('/')}}css/datepicker.min.css">

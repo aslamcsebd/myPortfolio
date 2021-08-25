@@ -1,8 +1,10 @@
 @extends('frontend.master')
 	@php
 		$effect = array('fadeInLeft', 'fadeInRight', 'fadeInTop', 'fadeInBottom');
+		$color = array('bg-primary', 'bg-secondary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger', 'bg-dark');
 	@endphp
 @section('content')
+ @include('common.alertMessage')
 
 <div id="colorlib-page">
 	<div class="container-wrap">
@@ -25,7 +27,6 @@
 						<li><a href="#" data-nav-section="education">Education</a></li>
 						<li><a href="#" data-nav-section="experience">Experience</a></li>
 						<li><a href="#" data-nav-section="work">Work</a></li>
-						<li><a href="#" data-nav-section="blog">Blog</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
 					</ul>
 				</div>
@@ -33,7 +34,7 @@
 			<div class="colorlib-footer">
 				<ul>
 					@foreach($SocialSite as $social)
-						<li><a href="{{$social->socialUrl}}" target="_blank">{!!$social->socialLogo!!}</a></li>
+						<li><a href="{{$social->socialUrl}}" target="_blank" title="{!!$social->socialName!!}">{!!$social->socialLogo!!}</a></li>
 					@endforeach
 				</ul>
 				<p>
@@ -44,6 +45,7 @@
 				</p>
 			</div>
 		</aside>
+
 		<div id="colorlib-main">
 			
 			<section id="colorlib-hero" class="js-fullheight" data-section="home">
@@ -130,7 +132,7 @@
 				</div>
 			</section>
 			
-			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url(images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
+			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url({{asset('/')}}frontend/images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 				<div class="colorlib-narrow-content">
 					<div class="row">
@@ -140,14 +142,17 @@
 							<span class="colorlib-counter js-counter" data-from="0" data-to="309" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Cups of coffee</span>
 						</div>
+
 						<div class="col-md-3 text-center animate-box">
 							<span class="colorlib-counter js-counter" data-from="0" data-to="356" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Projects</span>
 						</div>
+
 						<div class="col-md-3 text-center animate-box">
 							<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Clients</span>
 						</div>
+						
 						<div class="col-md-3 text-center animate-box">
 							<span class="colorlib-counter js-counter" data-from="0" data-to="10" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Partners</span>
@@ -275,7 +280,7 @@
 							<h2 class="colorlib-heading animate-box">Recent Work</h2>
 						</div>
 					</div>
-					<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+					{{-- <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
 						<div class="col-md-12">
 							<p class="work-menu"><span><a href="#" class="active">Graphic Design</a></span> <span><a href="#">Web Design</a></span> <span><a href="#">Software</a></span> <span><a href="#">Apps</a></span></p>
 						</div>
@@ -376,115 +381,69 @@
 						<div class="col-md-12 animate-box">
 							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
 						</div>
-					</div>
+					</div> --}}
+
+				    	<div class="list-group text-center col-6 mt-5">
+				    		<h3>Project List...</h3>
+						  	<a href="https://mysong.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-info">My Song</a>
+
+						  	<a href="https://ecommerce.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">Simple eCommerce</a>
+
+						  	<a href="https://hrm.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-success">Human Resource Management System</a>
+
+						  	<a href="https://localization.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger"> Laravel Dynamic Localization</a>
+
+						  	<a href="https://code.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-warning">Save Any Code [Core Code]</a>
+
+						  	<a href="https://relation.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-info">Laravel Table Relationship</a>
+						  	
+						  	<a href="https://anylink.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">Save Any Link</a>
+						</div>
 				</div>
-			</section>
-			
-			<section class="colorlib-blog" data-section="blog">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">Read</span>
-							<h2 class="colorlib-heading">Recent Blog</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-1.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Renovating National Gallery</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-2.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Web Design </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Wordpress for a Beginner</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<a href="blog.html" class="blog-img"><img src="images/blog-3.jpg" class="img-responsive" alt="HTML5 Bootstrap Template by colorlib.com"></a>
-								<div class="desc">
-									<span><small>April 14, 2018 </small> | <small> Inspiration </small> | <small> <i class="icon-bubble3"></i> 4</small></span>
-									<h3><a href="blog.html">Make website from scratch</a></h3>
-									<p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
-						</div>
-					</div>
-				</div>
-			</section>
-			
+			</section>			
 			<section class="colorlib-contact" data-section="contact">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
 							<span class="heading-meta">Get in Touch</span>
 							<h2 class="colorlib-heading">Contact</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-5">
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-globe-outline"></i>
+						<div class="col-md-4">
+							@foreach($ContactType as $item)
+								<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
+									<div class="colorlib-icon">
+										{!!$item->logo!!}
+									</div>
+									<div class="colorlib-text">
+										{!!$item->details!!}
+									</div>
 								</div>
-								<div class="colorlib-text">
-									<p><a href="#">info@domain.com</a></p>
-								</div>
-							</div>
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-map"></i>
-								</div>
-								<div class="colorlib-text">
-									<p>198 West 21th Street, Suite 721 New York NY 10016</p>
-								</div>
-							</div>
-							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
-								<div class="colorlib-icon">
-									<i class="icon-phone"></i>
-								</div>
-								<div class="colorlib-text">
-									<p><a href="tel://">+123 456 7890</a></p>
-								</div>
-							</div>
+							@endforeach
 						</div>
-						<div class="col-md-7 col-md-push-1">
+						<div class="col-md-8">
 							<div class="row">
-								<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInRight">
-									<form action="">
+								<div class="col-md-12 animate-box" data-animate-effect="fadeInRight">
+									<form action="{{ url('addContact') }}" method="post" enctype="multipart/form-data" class="needs-validation">
+										@csrf
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Name">
+											<input type="text" name="name" class="form-control" placeholder="Name" required>
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Email">
+											<input type="text" name="email" class="form-control" placeholder="Email" required>
 										</div>
 										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Subject">
+											<input type="text" name="subject" class="form-control" placeholder="Subject" required>
 										</div>
 										<div class="form-group">
-											<textarea name="" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+											<textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message" required></textarea>
 										</div>
 										<div class="form-group">
 											<input type="submit" class="btn btn-primary btn-send-message" value="Send Message">
 										</div>
 									</form>
-								</div>
-								
+								</div>								
 							</div>
 						</div>
 					</div>

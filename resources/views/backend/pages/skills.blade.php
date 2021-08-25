@@ -31,6 +31,7 @@
                         <th>No</th>                           
                         <th>Skill name</th>
                         <th>Range[%]</th>
+                        <th>Order By</th>
                         <th>Status</th>
                         <th>Action</th>
                      </thead>
@@ -40,6 +41,25 @@
                               <td width="5%">{{$loop->iteration}}</td>                              
                               <td class="p-2">{{$item->title}}</td>
                               <td class="p-2">{{$item->range}}%</td>
+                              <td width="8%">
+                                 <div class="btn-group ">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                       <i class="far fa-check-circle"></i>
+                                       {{$item->orderBy}}
+                                    </button>
+                                    <div class="dropdown-menu" style="min-width: 4rem; background-color: thistle;">
+                                       @for($i=1; $i <= $Skill->count(); $i++)                                          
+                                          <a href="{{ url('orderBy', ['skills', $item->id, $i, 'tabName'])}}"
+                                             class="{{$i==$item->orderBy ? 'bg-info disabled pl-2' : 'text-center'}} dropdown-item">
+                                             @if($i==$item->orderBy)
+                                                <i class="far fa-check-circle"></i>
+                                             @endif
+                                             {{$i}}
+                                          </a>
+                                       @endfor
+                                    </div>
+                                 </div>
+                              </td>
                               <td width="8%">
                                  @if($item->status == 1)
                                     <a href="{{ url('itemStatus', [$item->id, 'skills', 'skills'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
@@ -61,7 +81,7 @@
                </div>
 
                <div class="tab-pane fade show dataTableHide" id="aboutSkill">
-                 <p class="bg-success text-center pb-1 mb-2">About skill</p>
+                  <p class="bg-success text-center pb-1 mb-2">About skill</p>
                   @if($AnyTitle)
                      <table class="table table-bordered mb-3">
                         <thead class="text-center">
@@ -107,8 +127,7 @@
                            <button class="btn btn-sm btn-primary float-right">Save</button>
                         </div>
                      </form>
-                  @endif
-                 
+                  @endif                 
                </div>
             </div>
          </div>            
@@ -228,5 +247,32 @@
             modal.find('.modal-body #num').val(range);
          })
       </script>
+
+
+      <script type="text/javascript"> 
+         $(document).ready(function() {
+            $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+            // function starts
+            $(".edit").click(function(){
+               alert(results);
+               var id = $(this).data('id');
+
+               //alert("first value " + userid + "And second value is " + catid );
+               $.ajax({
+                  method: "GET", // post does not work
+                  url: "{{ url('edit') }}",
+                  data: {id: id},
+
+                  // success:function(response){   
+                  //    $('.modal-body').html(response);
+                  //    // $("div#CityResShow").html(result);
+                  //    $('#edit').modal('show');
+                  // }
+               });
+
+            });
+         // function ends
+         }); 
+      </script>   
 
 @endsection

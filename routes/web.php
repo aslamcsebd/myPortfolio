@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/clear', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('config:cache');
-    Artisan::call('view:clear');
+   Artisan::call('cache:clear');
+   Artisan::call('config:clear');
+   Artisan::call('config:cache');
+   Artisan::call('view:clear');
 
-    return "<h1> Cleared!</h1>";
+   return "<h1> Cleared!</h1>";
 });
 
 Route::get('/admin', 'HomeController@index')->name('admin');
@@ -66,9 +66,14 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editExperience/', 'BackendController@editExperience')->name('editExperience');           
       Route::post('editExperience2/', 'BackendController@editExperience2')->name('editExperience2');           
    
+   // Contact
    Route::get('work/', 'BackendController@work')->name('work');
-   Route::get('blog/', 'BackendController@blog')->name('blog');
-   Route::get('contact/', 'BackendController@contact')->name('contact');
+   
+      Route::get('contact/', 'BackendController@contact')->name('contact');
+      Route::post('addContact/', 'BackendController@addContact')->name('addContact');
+      Route::get('viewContact/', 'BackendController@viewContact')->name('viewContact');
+      Route::post('addContactType/', 'BackendController@addContactType')->name('addContactType');
+      Route::post('editContactType/', 'BackendController@editContactType')->name('editContactType');
 
 
 // All status change   
@@ -78,3 +83,7 @@ Route::get('/', 'FrontendController@index')->name('home');
 // Any title
    Route::post('addAnyTitle/', 'BackendController@addAnyTitle')->name('addAnyTitle');
    Route::post('editAnyTitle/', 'BackendController@editAnyTitle')->name('editAnyTitle');
+
+// Order Change   
+   Route::get('orderBy/{model}/{id}/{targetId}/{tab}','BackendController@orderBy')->name('orderBy');
+

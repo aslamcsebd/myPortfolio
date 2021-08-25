@@ -200,17 +200,19 @@ figure {
       background: aqua; border-radius: 8px 0px;
    }
    .colorlib-footer li a i{
-      font-size: large; margin: 7px; color: darkblue;
+      margin: 7px; color: darkblue; font-size: 13px;
    }
-   .colorlib-footer li:nth-child(odd) a:hover{
-      padding: 10px; background: darkcyan;
-   }
+   .colorlib-footer li:nth-child(odd) a:hover,
    .colorlib-footer li:nth-child(even) a:hover{
       padding: 10px; background: darkcyan;
    }
-   .colorlib-footer li a i:hover{
+   .colorlib-footer li:nth-child(odd) a:hover i,
+   .colorlib-footer li:nth-child(even) a:hover i{
       color: #fff;
    }
+
+
+
 
     @media screen and (max-width: 768px) {
       #colorlib-aside .colorlib-footer {
@@ -228,7 +230,7 @@ figure {
         list-style: none; }
         #colorlib-aside .colorlib-footer ul li a {
           color: rgba(255, 255, 255, 0.3);
-          padding: 4px; }
+          padding: 1px 2px; }
           #colorlib-aside .colorlib-footer ul li a:hover, #colorlib-aside .colorlib-footer ul li a:active, #colorlib-aside .colorlib-footer ul li a:focus {
             text-decoration: none;
             outline: none;
@@ -831,24 +833,24 @@ body.offcanvas {
   text-align: left;
   width: 100%;
   float: left;
-  margin-bottom: 40px;
+  margin-bottom: 25px;
   position: relative; }
   .colorlib-feature .colorlib-icon {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100px;
+    width: 50px;
     height: 100px;
     display: table;
-    text-align: center;
-    background: #f2f3f7;
+    /*text-align: center;*/
+    /*background: cyan;*/
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     -ms-border-radius: 2px;
     border-radius: 2px; }
     .colorlib-feature .colorlib-icon i {
       display: table-cell;
-      vertical-align: middle;
+      /*vertical-align: middle;*/
       color: #2c98f0;
       font-size: 60px;
       height: 100px; }
@@ -856,7 +858,7 @@ body.offcanvas {
         .colorlib-feature .colorlib-icon i {
           font-size: 40px; } }
   .colorlib-feature .colorlib-text {
-    padding-left: 120px;
+    padding-left: 60px;
     width: 100%; }
     .colorlib-feature .colorlib-text h2, .colorlib-feature .colorlib-text h3 {
       margin: 0;
@@ -869,10 +871,11 @@ body.offcanvas {
       letter-spacing: 3px;
       text-transform: uppercase; }
   .colorlib-feature.colorlib-feature-sm .colorlib-text {
-    margin-top: 30px; }
+    /*margin-top: 30px; */
+ }
   .colorlib-feature.colorlib-feature-sm .colorlib-icon i {
     color: #2c98f0;
-    font-size: 40px; }
+    font-size: 35px; }
     @media screen and (max-width: 1200px) {
       .colorlib-feature.colorlib-feature-sm .colorlib-icon i {
         font-size: 28px; } }
@@ -1452,4 +1455,30 @@ body.offcanvas {
 .justify{text-align: justify !important;}
 .alert:first-letter{text-transform: uppercase !important;}
 
-.hide{ display: none; }  
+.hide{ display: none; }
+
+/*Title*/
+[title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[title] {
+    position: relative;
+}
+
+[title]:after {
+    content: attr(title);
+    background-color: bisque;
+    color: #111;
+    position: absolute;
+    padding: 0px 2px;
+    bottom: 2em;
+    white-space: nowrap;
+    opacity: 0;
+    border: 1px dotted #000;
+    border-radius: 5px;
+    z-index: 99999;
+    visibility: hidden;
+    text-transform: capitalize;
+}

@@ -50,5 +50,13 @@
       <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
       <script src="{{ asset('frontend/js/jquery.countTo.js') }}"></script>
       <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+      <script type="text/javascript">
+         window.setTimeout(function(){
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+               $(this).remove(); 
+            });
+         }, 5000);
+      </script>
    </body>
 </html>

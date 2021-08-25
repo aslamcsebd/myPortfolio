@@ -16,6 +16,8 @@ use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Contact;
+use App\Models\ContactType;
 
 class BackendController extends Controller {
 	
@@ -238,7 +240,7 @@ class BackendController extends Controller {
 //Skill
    public function skills(){
       $data['AnyTitle'] = AnyTitle::where('title', 'aboutSkill')->first();
-      $data['Skill'] = Skill::all();
+      $data['Skill'] = Skill::orderBy('orderBy')->get();
       return view('backend.pages.skills', $data);
    }
 
@@ -253,10 +255,14 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
       
+      $id=DB::table('skills')->latest()->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+      
       Skill::insert([
          'title'=>$request->title,
          'range'=>$request->range,
          'status'=>1,
+         'orderBy'=>$orderId,
          'created_at' => Carbon::now()
       ]);         
       return back()->with('success', 'Skills add successfully');  
@@ -395,13 +401,93 @@ class BackendController extends Controller {
       return view('backend.pages.work');
    }
 
-   public function blog(){
-      return view('backend.pages.blog');
+// Contact
+   public function contact(){
+      $data['Contact'] = Contact::all();
+      $data['ContactType'] = ContactType::orderBy('orderBy')->get();
+      return view('backend.pages.contact', $data);
    }
 
-   public function contact(){
-      return view('backend.pages.contact');
+   public function addContact(Request $request){
+      $validator = Validator::make($request->all(),[
+         'name'=>'required',
+         'email'=>'required',
+         'subject'=>'required',
+         'message'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      Contact::insert([
+         'name'=>$request->name,
+         'email'=>$request->email,
+         'subject'=>$request->subject,
+         'message'=>$request->message,
+         'status'=>false,
+         'created_at' => Carbon::now()
+      ]);
+         
+      return back()->with('danger', 'Your message send successfully'); 
    }
+
+   public function viewContact(){
+      $data['Contact'] = Contact::find($_REQUEST['id']);
+      $data['Contact']->status = true;     
+      $data['Contact']->save();
+      return view('backend.pages.ajaxView', $data);
+   }
+   
+   public function addContactType(Request $request){
+      $validator = Validator::make($request->all(),[
+         'name'=>'required',
+         'logo'=>'required',
+         'details'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      $id=DB::table('contact_types')->latest()->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+      
+      ContactType::insert([
+         'name'=>$request->name,
+         'logo'=>$request->logo,
+         'details'=>$request->details,
+         'status'=>1,
+         'orderBy'=>$orderId,
+         'created_at' => Carbon::now()
+      ]);
+         
+      return back()->with('success', 'Contact type add successfully')->withInput(['tab' => 'contactType']);
+   }
+
+   public function editContactType(Request $request){
+      $validator = Validator::make($request->all(),[
+         'name'=>'required',
+         'logo'=>'required',
+         'details'=>'required'
+      ]);
+      
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      ContactType::where('id', $request->id)->update([
+         'name'=>$request->name,
+         'logo'=>$request->logo,
+         'details'=>$request->details
+      ]);
+         
+      return back()->with('success', 'Contact type update successfully')->withInput(['tab' => $request->tab]);
+   }
+
    
 // Status [Active vs Inactive]
    public function itemStatus($id, $model, $tab){
@@ -422,7 +508,7 @@ class BackendController extends Controller {
       return back()->with('success', $model.' delete successfully')->withInput(['tab' => $tab]);
    }
 
-//Any title
+// Any title
    public function addAnyTitle(Request $request){
       $validator = Validator::make($request->all(),[
          'description'=>'required',
@@ -457,4 +543,12 @@ class BackendController extends Controller {
       ]);
       return back()->with('success', $request->title.' update successfully')->withInput(['tab' => $request->tab]);
    }
+
+// Order By
+   public function orderBy($model, $id, $targetId, $tab){
+      DB::table($model)->where('id', $id)->update(['orderBy' => $targetId]);      
+      return back()->with('success', $model.' orderBy change')->withInput(['tab' => $tab]);
+   }
+
+
 }

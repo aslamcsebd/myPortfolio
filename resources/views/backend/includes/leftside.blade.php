@@ -64,15 +64,8 @@
             </li>
 
             <li class="nav-item as-treeview">
-               <a href="{{ route('blog') }}" class="nav-link {{ (request()->routeIs('blog*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
-                  <p>Blog</p>
-               </a>
-            </li>
-
-            <li class="nav-item as-treeview">
                <a href="{{ route('contact') }}" class="nav-link {{ (request()->routeIs('contact*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
+                  <i class="nav-icon fas fa-address-book"></i>
                   <p>Contact</p>
                </a>
             </li>
