@@ -7,31 +7,17 @@
    <span class="navbar-toggler-icon"></span>
    </button>
    <div class="collapse navbar-collapse" id="navbarSupportedContent">     
-
-      @auth
-         <ul class="navbar-nav m-auto">            
-            <li class="nav-item">
-               <a class="nav-link btn btn-sm btn-primary text-light">Item</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link btn btn-sm btn-success mx-2 text-light" data-toggle="modal" data-original-title="test" data-target="#modelName">Item 2</a>
-            </li>
-            <li class="nav-item">
-               <a class="nav-link btn btn-sm btn-danger text-light"href="#">Item 3</a>
-            </li>
-         </ul>
-      @endauth
-
+      
       <ul class="navbar-nav ml-auto">
          @guest
             <li class="nav-item">
                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
-            @if (Route::has('register'))
+            {{-- @if (Route::has('register'))
                <li class="nav-item">
                   <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                </li>
-            @endif
+            @endif --}}
          @else
          <li class="nav-item userName dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

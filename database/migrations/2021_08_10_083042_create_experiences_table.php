@@ -19,6 +19,7 @@ class CreateExperiencesTable extends Migration
             $table->string('startDate', 50);
             $table->string('endDate', 50);
             $table->text('description');
+            $table->integer('orderBy');
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();

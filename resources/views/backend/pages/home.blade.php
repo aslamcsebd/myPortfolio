@@ -20,6 +20,7 @@
                   <th>Image</th>
                   <th>First title</th>
                   <th>Second title</th>
+                  <th>Order By</th>
                   <th>Status</th>
                   <th>Action</th>
                </thead>
@@ -30,6 +31,25 @@
                         <td class="p-2"><img src="{{$item->image}}" width="120" height="100"></td>
                         <td class="justify">{!!$item->firstTitle!!}</td>
                         <td class="justify">{!!$item->secondTitle!!}</td>
+                        <td width="8%">
+                           <div class="btn-group">
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                 <i class="far fa-check-circle"></i>
+                                 {{$item->orderBy}}
+                              </button>
+                              <div class="dropdown-menu">
+                                 @for($i=1; $i <= $Home->count(); $i++)                                          
+                                    <a href="{{ url('orderBy', ['homes', $item->id, $i, 'tabName'])}}"
+                                       class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                       @if($i==$item->orderBy)
+                                          <i class="far fa-check-circle"></i>
+                                       @endif
+                                       {{$i}}
+                                    </a>
+                                 @endfor
+                              </div>
+                           </div>
+                        </td>
                         <td width="8%">
                            @if($item->status == 1)
                               <a href="{{ url('itemStatus', [$item->id, 'homes', 'tabName']) }}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>

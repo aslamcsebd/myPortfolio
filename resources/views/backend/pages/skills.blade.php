@@ -50,7 +50,7 @@
                                     <div class="dropdown-menu" style="min-width: 4rem; background-color: thistle;">
                                        @for($i=1; $i <= $Skill->count(); $i++)                                          
                                           <a href="{{ url('orderBy', ['skills', $item->id, $i, 'tabName'])}}"
-                                             class="{{$i==$item->orderBy ? 'bg-info disabled pl-2' : 'text-center'}} dropdown-item">
+                                             class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
                                              @if($i==$item->orderBy)
                                                 <i class="far fa-check-circle"></i>
                                              @endif

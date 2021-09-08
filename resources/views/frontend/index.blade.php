@@ -2,6 +2,7 @@
 	@php
 		$effect = array('fadeInLeft', 'fadeInRight', 'fadeInTop', 'fadeInBottom');
 		$color = array('bg-primary', 'bg-secondary', 'bg-success', 'bg-info', 'bg-warning', 'bg-danger', 'bg-dark');
+		$coffeeCount = ((date('Y')-2017)*12+date('m'))*20+date('d');
 	@endphp
 @section('content')
  @include('common.alertMessage')
@@ -56,7 +57,7 @@
 								<div class="overlay"></div>
 								<div class="container-fluid">
 									<div class="row">
-										<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
+										<div class="col-md-8 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
 											<div class="slider-text-inner js-fullheight">
 												<div class="desc">
 													<h1>{!!$item->firstTitle!!}</h1>
@@ -81,7 +82,7 @@
 									<div class="about-desc">
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading">Who Am I?</h2>
-										<p>{!!$aboutMe->description!!}</p>
+										<p>{{$aboutMe->description!=null ? $aboutMe->description:''}}</p>
 									</div>
 								</div>
 							</div>
@@ -97,9 +98,12 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-									<div class="hire">
-										<h2>I am happy to know you that 300+ projects done sucessfully!</h2>
-										<a href="#" class="btn-hire">Hire me</a>
+									<div class="hire" id="navbar" class="collapse">
+										<h2>I am happy to know you that {{$Work->count()}}+ projects done sucessfully!</h2>
+										<a href="#" data-nav-section="contact" class="btn-hire">Hire me</a>
+										<p class="pull-right">
+											<a href="#" data-nav-section="contact" class="btn-hire">Contact me</a>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -139,22 +143,22 @@
 					</div>
 					<div class="row">
 						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="309" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter js-counter" data-from="0" data-to="{{$coffeeCount}}" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Cups of coffee</span>
 						</div>
 
 						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="356" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter js-counter" data-from="0" data-to="{{$Work->count()}}" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Projects</span>
 						</div>
 
 						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="30" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter js-counter" data-from="0" data-to="{{$Work->count()+5}}" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Clients</span>
 						</div>
 						
 						<div class="col-md-3 text-center animate-box">
-							<span class="colorlib-counter js-counter" data-from="0" data-to="10" data-speed="5000" data-refresh-interval="50"></span>
+							<span class="colorlib-counter js-counter" data-from="0" data-to="{{$Work->count()+3}}" data-speed="5000" data-refresh-interval="50"></span>
 							<span class="colorlib-counter-label">Partners</span>
 						</div>
 					</div>
@@ -171,7 +175,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<p>{!!$aboutSkill->description!!}</p>
+							<p>{{$aboutSkill->description!=null ? $aboutSkill->description:''}}</p>
 						</div>
 
 						@foreach($Skill as $item)
@@ -280,128 +284,78 @@
 							<h2 class="colorlib-heading animate-box">Recent Work</h2>
 						</div>
 					</div>
-					{{-- <div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
-						<div class="col-md-12">
-							<p class="work-menu"><span><a href="#" class="active">Graphic Design</a></span> <span><a href="#">Web Design</a></span> <span><a href="#">Software</a></span> <span><a href="#">Apps</a></span></p>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-1.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 01</a></h3>
-										<span>Website</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(images/img-2.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 02</a></h3>
-										<span>Animation</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInTop">
-							<div class="project" style="background-image: url(images/img-3.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 03</a></h3>
-										<span>Illustration</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInBottom">
-							<div class="project" style="background-image: url(images/img-4.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 04</a></h3>
-										<span>Application</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(images/img-5.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 05</a></h3>
-										<span>Graphic, Logo</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInRight">
-							<div class="project" style="background-image: url(images/img-6.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3><a href="work.html">Work 06</a></h3>
-										<span>Web Design</span>
-										<p class="icon">
-											<span><a href="#"><i class="icon-share3"></i></a></span>
-											<span><a href="#"><i class="icon-eye"></i> 100</a></span>
-											<span><a href="#"><i class="icon-heart"></i> 49</a></span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 animate-box">
-							<p><a href="#" class="btn btn-primary btn-lg btn-load-more">Load more <i class="icon-reload"></i></a></p>
-						</div>
-					</div> --}}
+						
+					<fieldset>
+						<legend>Project List [{{$Work->count()}}]</legend>
+						<div class="work" style="height:300px;">
+						  	<ul class="nav nav-tabs col-md-4" role="tablist">
+						    	<li role="presentation" class="active">
+						    		<a href="#home" aria-controls="home" role="tab" data-toggle="tab">Project overview [click below]</a>
+						    	</li>
+						 		@foreach($Work as $item)						    		
+						    		<li>
+						    			<a href="#project{{$item->id}}" data-toggle="tab">{{$loop->iteration}}) {{$item->name}}</a>
+						    		</li>
+						    	@endforeach
+						   </ul>
 
-				    	<div class="list-group text-center col-6 mt-5">
-				    		<h3>Project List...</h3>
-						  	<a href="https://mysong.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-info">My Song</a>
+						  	<div class="tab-content col-md-8">
+						    	<div role="tabpanel" class="tab-pane active" id="home">
+						    		<div class="animate-box" data-animate-effect="fadeInLeft">
+						    			<ul>
+							    			@foreach($Work as $item)
+							    			<li>
+							    				{{$item->name}} [{{$item->date}}]
+							    			</li>
+							    			@endforeach
+						    			</ul>						    				
+						    		</div>
+						    	</div>
+						    	@foreach($Work as $item)
+							    	<div class="tab-pane" id="project{{$item->id}}">
+										<div class="animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
+											<div class="project" style="background-image: url({{$item->image}});">
+												<div class="desc">
+													<div class="con">
+														<h3>
+															<a href="{{$item->link}}">Project No : {{$loop->iteration}} of {{$Work->count()}}</a>
+															<a href="{{$item->link}}" class="pull-right">Complete date : {{$item->date}}</a>
+														</h3>
+														<span class="justify">{!!$item->description!!}</span>
+														<p class="icon">
+															@if($item->github!=null)
+																<span>
+																	<a href="{{$item->github}}" target="_blank" title="See github link"><i class="fab fa-github"></i>  
+																	</a>
+																</span>
+															@endif
+															@if($item->link!=null)
+																<span>
+																	<a href="{{$item->link}}" target="_blank" title="See this project"><i class="fas fa-external-link-alt"></i></a>
+																</span>
+															@endif
+															<br>
+															@if($item->skill!=null)
+																<span>
+																	<b>Language : </b> {!!$item->skill!!}
+																</span>
+															@endif
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+							    	</div>
+						    	@endforeach
 
-						  	<a href="https://ecommerce.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">Simple eCommerce</a>
-
-						  	<a href="https://hrm.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-success">Human Resource Management System</a>
-
-						  	<a href="https://localization.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger"> Laravel Dynamic Localization</a>
-
-						  	<a href="https://code.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-warning">Save Any Code [Core Code]</a>
-
-						  	<a href="https://relation.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-info">Laravel Table Relationship</a>
-						  	
-						  	<a href="https://anylink.aslambd.com/" target="_blank" class="list-group-item list-group-item-action list-group-item-danger">Save Any Link</a>
+						  	</div>
 						</div>
+					</fieldset>
+
 				</div>
-			</section>			
-			<section class="colorlib-contact" data-section="contact">
+			</section>
+
+			<section class="colorlib-contact" data-section="contact" id="contact">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
@@ -411,7 +365,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4">
-							@foreach($ContactType as $item)
+							@foreach($Contact as $item)
 								<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
 									<div class="colorlib-icon">
 										{!!$item->logo!!}
@@ -425,7 +379,7 @@
 						<div class="col-md-8">
 							<div class="row">
 								<div class="col-md-12 animate-box" data-animate-effect="fadeInRight">
-									<form action="{{ url('addContact') }}" method="post" enctype="multipart/form-data" class="needs-validation">
+									<form action="{{ url('addContactEmail') }}" method="post" enctype="multipart/form-data" class="needs-validation">
 										@csrf
 										<div class="form-group">
 											<input type="text" name="name" class="form-control" placeholder="Name" required>

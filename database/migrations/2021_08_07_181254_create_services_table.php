@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('title', 50);
             $table->string('logo', 150);
             $table->text('description');
+            $table->integer('orderBy');
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();

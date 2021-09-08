@@ -1,7 +1,3 @@
-<footer class="bg-success text-center mt-5 p-2">
-   <b>Copyright &copy; <?=date('Y');?></b>
-   <a class="text-light" href="https://www.aslambd.com"> All rights reserved</a>
-</footer>   
 
 <!-- jQuery -->
    <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>

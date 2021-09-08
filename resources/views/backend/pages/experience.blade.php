@@ -22,6 +22,7 @@
                   <th>Start date</th>
                   <th>End date</th>
                   <th>Description</th>
+                  <th>Order By</th>
                   <th>Status</th>
                   <th>Action</th>
                </thead>
@@ -33,6 +34,25 @@
                         <td width="9%">{!! date('M-Y', strtotime($item->startDate)) !!}</td>
                         <td width="9%">{!! date('M-Y', strtotime($item->endDate)) !!}</td>
                         <td width="">{!! $item->description !!}</td>
+                        <td width="8%">
+                           <div class="btn-group">
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                 <i class="far fa-check-circle"></i>
+                                 {{$item->orderBy}}
+                              </button>
+                              <div class="dropdown-menu">
+                                 @for($i=1; $i <= $Experience->count(); $i++)                                          
+                                    <a href="{{ url('orderBy', ['experiences', $item->id, $i, 'tabName'])}}"
+                                       class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                       @if($i==$item->orderBy)
+                                          <i class="far fa-check-circle"></i>
+                                       @endif
+                                       {{$i}}
+                                    </a>
+                                 @endfor
+                              </div>
+                           </div>
+                        </td>
                         <td width="5%">
                            @if($item->status == 1)
                               <a href="{{ url('itemStatus', [$item->id, 'experiences', 'tabName'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>

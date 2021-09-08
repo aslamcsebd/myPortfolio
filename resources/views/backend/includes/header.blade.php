@@ -1,6 +1,6 @@
 <nav id="navbar_top" class="navbar navbar-expand-md navbar-light navbar-muted shadow-sm">   
-   <a class="navbar-brand" href="{{ url('/admin') }}">
-      {{ config('app.name', 'None') }}      
+   <a class="navbar-brand" href="{{ url('/index') }}">
+      Victory Loves Preparation 
    </a>
    <button class="navbar-toggler text-primary" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
    <span class="navbar-toggler-icon"></span>
@@ -14,22 +14,7 @@
             <span class="minimize">Minimize</span>
          </a>
       </ul>
-      {{-- @auth --}}
-      <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
-            <a class="nav-link btn btn-sm btn-secondary text-light">Item 1</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link btn btn-sm btn-secondary text-light" data-toggle="modal" data-original-title="test" data-target="#smallModal">Small Modal</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link btn btn-sm btn-secondary text-light" data-toggle="modal" data-original-title="test" data-target="#largeModal">Large Modal</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link btn btn-sm btn-secondary text-light" data-toggle="modal" data-original-title="test" data-target="#fixedModal">Fixed Modal</a>
-         </li>    
-      </ul>
-      {{-- @endauth --}}
+      
       <ul class="navbar-nav ml-auto">
          @guest
             <li class="nav-item">

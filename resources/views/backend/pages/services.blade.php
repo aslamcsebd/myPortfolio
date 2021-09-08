@@ -19,6 +19,7 @@
                   <th>Logo</th>
                   <th>Title</th>
                   <th>Description</th>
+                  <th>Order By</th>
                   <th>Status</th>
                   <th>Action</th>
                </thead>
@@ -29,6 +30,25 @@
                         <td>{!! $item->logo !!}</td>
                         <td>{!! $item->title !!}</td>                        
                         <td>{!! $item->description !!}</td>
+                        <td width="8%">
+                           <div class="btn-group">
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                 <i class="far fa-check-circle"></i>
+                                 {{$item->orderBy}}
+                              </button>
+                              <div class="dropdown-menu">
+                                 @for($i=1; $i <= $Service->count(); $i++)                                          
+                                    <a href="{{ url('orderBy', ['services', $item->id, $i, 'tabName'])}}"
+                                       class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                       @if($i==$item->orderBy)
+                                          <i class="far fa-check-circle"></i>
+                                       @endif
+                                       {{$i}}
+                                    </a>
+                                 @endfor
+                              </div>
+                           </div>
+                        </td>
                         <td width="8%">
                            @if($item->status == 1)
                               <a href="{{ url('itemStatus', [$item->id, 'services', 'socialSite'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
@@ -72,8 +92,7 @@
                         </div>
                         <div class="form-group col">
                            <label for="logo">Service logo :</label>
-                           <input type="text" name="logo" id="logo" class="form-control mb-2" placeholder="<i class='fa fa-name'></i>" required>                       
-                           <a class="btn-sm btn-success" href="https://fontawesome.com/" target="_blank">Search Font</a>
+                           <input type="text" name="logo" id="logo" value="<i class='fab fa-name'></i>" class="form-control mb-2" placeholder="<i class='fab fa-name'></i>" required>
                         </div>
                      <small class="bg-info p-1 ml-2">Example : Innovative Ideas, Graphic Design, Web Design, Software, Application etc</small>         
                      </div>

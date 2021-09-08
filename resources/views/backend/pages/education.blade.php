@@ -22,7 +22,8 @@
                   <th>Degree name</th>
                   <th>Complete date</th>
                   <th>Description</th>
-                  {{-- <th>Status</th> --}}
+                  <th>Order By</th>
+                  <th>Status</th>
                   <th>Action</th>
                </thead>
                <tbody>
@@ -34,13 +35,32 @@
                            [{{\Carbon\Carbon::parse($item->date)->diffForHumans()}}]
                         </td>
                         <td>{!! $item->description !!}</td>
-                        {{-- <td width="8%">
+                        <td width="8%">
+                           <div class="btn-group">
+                              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                 <i class="far fa-check-circle"></i>
+                                 {{$item->orderBy}}
+                              </button>
+                              <div class="dropdown-menu">
+                                 @for($i=1; $i <= $Education->count(); $i++)                                          
+                                    <a href="{{ url('orderBy', ['education', $item->id, $i, 'tabName'])}}"
+                                       class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                       @if($i==$item->orderBy)
+                                          <i class="far fa-check-circle"></i>
+                                       @endif
+                                       {{$i}}
+                                    </a>
+                                 @endfor
+                              </div>
+                           </div>
+                        </td>
+                        <td width="8%">
                            @if($item->status == 1)
                               <a href="{{ url('itemStatus', [$item->id, 'education', 'tabName'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
                            @else
                               <a href="{{ url('itemStatus', [$item->id, 'education', 'tabName'])}}" class="btn px-1 btn-sm btn-danger" title="Click for active">Inactive</a>
                            @endif
-                        </td> --}}
+                        </td>
                         <td width="10%">
                            <div class="btn-group" role="group" aria-label="Basic example">
                               <a class="btn btn-sm btn-success text-light editEducation" data-toggle="modal" data-target="#editEducation" data-id="{{$item->id}}">Edit</a>

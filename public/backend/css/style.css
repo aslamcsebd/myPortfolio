@@ -145,5 +145,7 @@ legend {
 .capitalize{ text-transform: capitalize; }
 .justify{text-align: justify !important;}
 .alert:first-letter{text-transform: uppercase !important;}
-
+.form-group { margin-bottom: 0.5rem; }
 .hide{ display: none; }
+
+.dropdown-menu{ min-width: 4rem; background-color: thistle; }

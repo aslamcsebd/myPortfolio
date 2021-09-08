@@ -17,8 +17,8 @@ class CreateSkillsTable extends Migration
             $table->id();
             $table->string('title', 100);
             $table->tinyInteger('range');
-            $table->tinyInteger('status');
             $table->integer('orderBy');
+            $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
         });

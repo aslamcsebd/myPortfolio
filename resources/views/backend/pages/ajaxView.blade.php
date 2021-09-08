@@ -1,6 +1,6 @@
    
 @if(isset($Home))
-   <form action="{{ url('editService2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+   <form action="{{ url('editHome2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
       @csrf                   
       <div class="form">
          <div class="form-group row">
@@ -128,15 +128,72 @@
    </form>
 @endif
 
-@if(isset($Contact))
+@if(isset($Work))
+   <form action="{{ url('editWork2') }}" method="post" enctype="multipart/form-data" class="needs-validation" >
+      @csrf
+      <div class="form-group">
+         <input  name="id" value="{{$Work->id}}" hidden>
+         <input  name="oldImage" value="{{$Work->image}}" hidden>
+         <label for="name">Project name :</label>
+         <input type="text" name="name" class="form-control" value="{{$Work->name}}"  id="name" placeholder="Ex: Hotel booking, HRM, CMS..." required>
+      </div>
+
+      <div class="row">
+         <div class="col-4">
+            <label for="old">Present image :</label>
+            <img class="border border-dark" src="{{$Work->image}}" width="150" height="110">
+         </div>
+         <div class="col row">
+            <div class="form-group col-12">
+               <label for="image">Project image :</label>
+               <input type="file" class="form-control" id="image" name="image">
+            </div>
+            
+            <div class="form-group col-12">
+               <label for="date">Complete date :</label>
+               <input name="date" class="form-control datepicker" id="date" value="{!! date('Y-M', strtotime($Work->date)) !!}">
+            </div>
+         </div>
+      </div>
+
+      <div class="form-group">
+         <label for="skill">Project skill  name :</label>
+         <input type="text" name="skill" class="form-control" value="{{$Work->skill}}" id="skill" placeholder="Ex: html, css, js...">
+      </div>
+      
+      <div class="row">
+         <div class="form-group col">
+            <label for="link">Project link :</label>
+            <input type="text" name="link" class="form-control" value="{{$Work->link}}" id="link" placeholder="Ex: www.projectName.com">
+         </div>
+         <div class="form-group col">
+            <label for="github">Github link:</label>
+            <input type="text" name="github" class="form-control" value="{{$Work->github}}" id="github" placeholder="Ex: https://github.com">
+         </div>
+      </div>
+      <div class="form-group">
+         <label for="description" class="mb-2">Description :</label>
+         <textarea type="text" id="description" class="form-control summernote required" name="description" required>{{$Work->description}}</textarea>
+      </div>
+      <div class="modal-footer">
+         <div class="btn-group">
+            <button class="btn btn-sm btn-primary">Save</button>
+            <button class="btn btn-sm btn-secondary" type="button" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </form>
+@endif
+
+@if(isset($ContactEmail))
    <div class="form">
       <div class="form-group">
-         <label>Name :</label> {{$Contact->name}} <br>
-         <label>Email :</label> {{$Contact->email}}  <br>        
-         <label>Subject :</label> {{$Contact->subject}} <br>
-      
-         <label>Message :</label>
-         <p class="justify">{{$Contact->message}}</p>
+         <label>Name :</label> {{$ContactEmail->name}} <br>
+         <label>Email :</label> {{$ContactEmail->email}}  <br>        
+         <label>Subject :</label> {{$ContactEmail->subject}} <br>
+         <fieldset>
+            <legend style="text-align: left; margin-left: -10px;">Message :</legend>
+            <p class="justify">{{$ContactEmail->message}}</p>
+         </fieldset>
       </div>
    </div>
 @endif
@@ -152,7 +209,7 @@
    });
 
    $(".datepicker").datepicker({
-      format: "MM-yyyy",
+      format: "yyyy-MM",
       startView: "months", 
       minViewMode: "months"
    });

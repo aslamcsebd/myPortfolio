@@ -32,6 +32,7 @@
                      <thead class="text-center">
                         <th>No</th>                           
                         <th>Image</th>
+                        <th>Order By</th>
                         <th>Status</th>
                         <th>Action</th>
                      </thead>
@@ -40,6 +41,25 @@
                            <tr>
                               <td width="5%">{{$loop->iteration}}</td>                              
                               <td class="p-2"><img src="{{$item->image}}" width="120" height="100"></td>
+                              <td width="8%">
+                                 <div class="btn-group">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                       <i class="far fa-check-circle"></i>
+                                       {{$item->orderBy}}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                       @for($i=1; $i <= $ProfilePicture->count(); $i++)                                          
+                                          <a href="{{ url('orderBy', ['profile_pictures', $item->id, $i, 'tabName'])}}"
+                                             class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                             @if($i==$item->orderBy)
+                                                <i class="far fa-check-circle"></i>
+                                             @endif
+                                             {{$i}}
+                                          </a>
+                                       @endfor
+                                    </div>
+                                 </div>
+                              </td>
                               <td width="8%">
                                  @if($item->status == 1)
                                     <a href="{{ url('itemStatus', [$item->id, 'profile_pictures', 'image'])}}" class="btn px-1 btn-sm btn-success" title="Click for inactive">Active</a>
@@ -66,6 +86,7 @@
                         <th>Logo</th>
                         <th>Social name</th>
                         <th>Link</th>
+                        <th>Order By</th>
                         <th>Status</th>
                         <th>Action</th>
                      </thead>
@@ -81,6 +102,25 @@
                               </td>
                               <td>
                                  <a href='{{ url($item->socialUrl) }}' target="_blank">{{ $item->socialUrl }}</a>
+                              </td>
+                              <td width="8%">
+                                 <div class="btn-group">
+                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                       <i class="far fa-check-circle"></i>
+                                       {{$item->orderBy}}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                       @for($i=1; $i <= $SocialSite->count(); $i++)                                          
+                                          <a href="{{ url('orderBy', ['social_sites', $item->id, $i, 'socialSite'])}}"
+                                             class="{{$i==$item->orderBy ? 'bg-info text-white disabled pl-2' : 'text-center'}} dropdown-item">
+                                             @if($i==$item->orderBy)
+                                                <i class="far fa-check-circle"></i>
+                                             @endif
+                                             {{$i}}
+                                          </a>
+                                       @endfor
+                                    </div>
+                                 </div>
                               </td>
                               <td width="8%">
                                  @if($item->status == 1)
@@ -156,8 +196,7 @@
                         </div>
                         <div class="form-group col">
                            <label for="socialLogo">Social Logo :</label>
-                           <input type="text" name="socialLogo" id="socialLogo" class="form-control mb-2" placeholder="<i class='fa fa-name'></i>" required>                       
-                           <a class="btn-sm btn-success" href="https://fontawesome.com/" target="_blank">Search Font</a>
+                           <input type="text" name="socialLogo" id="socialLogo" value="<i class='fab fa-name'></i>" class="form-control mb-2" placeholder="<i class='fa fa-name'></i>" required>
                         </div>
                      </div>                
                      <div class="form">

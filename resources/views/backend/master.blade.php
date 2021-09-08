@@ -10,7 +10,6 @@
       @include('backend.includes.header')
       @include('backend.includes.leftside')
       @yield('content')
-      @include('backend.includes.modal')
 
       @include('backend.includes.footer')
       @yield('modal')

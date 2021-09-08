@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEducationTable extends Migration
+class CreateWorksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateEducationTable extends Migration
      */
     public function up()
     {
-        Schema::create('education', function (Blueprint $table) {
+        Schema::create('works', function (Blueprint $table) {
             $table->id();
-            $table->string('degree', 150);
+            $table->string('name', 100);
+            $table->string('image', 150);
             $table->string('date', 50);
+            $table->string('skill', 150)->nullable();
+            $table->string('link', 150)->nullable();
+            $table->string('github', 150)->nullable();
             $table->text('description');
             $table->integer('orderBy');
             $table->tinyInteger('status');
@@ -24,7 +28,6 @@ class CreateEducationTable extends Migration
             $table->softDeletes();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -32,6 +35,6 @@ class CreateEducationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('education');
+        Schema::dropIfExists('works');
     }
 }

@@ -13,6 +13,7 @@ Route::get('/clear', function() {
 });
 
 Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/index', 'HomeController@index')->name('index');
 
 // Route::prefix('admin')->group(function(){
 //    Route::get('/login','BackendController@ShowLoginForm')->name('admin.login');
@@ -21,6 +22,7 @@ Route::get('/admin', 'HomeController@index')->name('admin');
 Route::get('/', 'FrontendController@index')->name('home');
 
 // Backend
+
    // left
       // profile image
       Route::get('left/', 'BackendController@left')->name('left');
@@ -40,16 +42,16 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editHome/', 'BackendController@editHome')->name('editHome');       
       Route::post('editHome2/', 'BackendController@editHome2')->name('editHome2');       
 
-   //About
+   // About
       Route::get('about/', 'BackendController@about')->name('about');
 
-   //Service
+   // Service
       Route::get('services/', 'BackendController@services')->name('services');
       Route::post('addService/', 'BackendController@addService')->name('addService');
       Route::get('editService/', 'BackendController@editService')->name('editService');       
       Route::post('editService2/', 'BackendController@editService2')->name('editService2');       
 
-   //Skill
+   // Skill
       Route::get('skills/', 'BackendController@skills')->name('skills');
       Route::post('addSkill/', 'BackendController@addSkill')->name('addSkill');
       Route::post('editSkill/', 'BackendController@editSkill')->name('editSkill');           
@@ -60,21 +62,26 @@ Route::get('/', 'FrontendController@index')->name('home');
       Route::get('editEducation/', 'BackendController@editEducation')->name('editEducation');           
       Route::post('editEducation2/', 'BackendController@editEducation2')->name('editEducation2');           
 
-   //Experience
+   // Experience
       Route::get('experience/', 'BackendController@experience')->name('experience');
       Route::post('addExperience/', 'BackendController@addExperience')->name('addExperience');
       Route::get('editExperience/', 'BackendController@editExperience')->name('editExperience');           
-      Route::post('editExperience2/', 'BackendController@editExperience2')->name('editExperience2');           
-   
-   // Contact
-   Route::get('work/', 'BackendController@work')->name('work');
-   
-      Route::get('contact/', 'BackendController@contact')->name('contact');
-      Route::post('addContact/', 'BackendController@addContact')->name('addContact');
-      Route::get('viewContact/', 'BackendController@viewContact')->name('viewContact');
-      Route::post('addContactType/', 'BackendController@addContactType')->name('addContactType');
-      Route::post('editContactType/', 'BackendController@editContactType')->name('editContactType');
+      Route::post('editExperience2/', 'BackendController@editExperience2')->name('editExperience2');
 
+   // Work
+      Route::get('work/', 'BackendController@work')->name('work');
+      Route::post('addWork/', 'BackendController@addWork')->name('addWork');
+      Route::get('editWork/', 'BackendController@editWork')->name('editWork');           
+      Route::post('editWork2/', 'BackendController@editWork2')->name('editWork2');
+
+   // Contact
+      Route::get('contact/', 'BackendController@contact')->name('contact');
+      Route::get('unseenMail/', 'BackendController@unseenMail')->name('unseenMail');
+      Route::post('addContactEmail/', 'BackendController@addContactEmail')->name('addContactEmail');
+      Route::get('viewContactEmail/', 'BackendController@viewContactEmail')->name('viewContactEmail');
+      
+      Route::post('addContact/', 'BackendController@addContact')->name('addContact');
+      Route::post('editContact/', 'BackendController@editContact')->name('editContact');
 
 // All status change   
    Route::get('itemStatus/{id}/{model}/{tab}','BackendController@itemStatus')->name('itemStatus');
@@ -86,4 +93,3 @@ Route::get('/', 'FrontendController@index')->name('home');
 
 // Order Change   
    Route::get('orderBy/{model}/{id}/{targetId}/{tab}','BackendController@orderBy')->name('orderBy');
-

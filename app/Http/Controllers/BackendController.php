@@ -7,6 +7,7 @@ use Redirect;
 use DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 use App\Models\AnyTitle;
 use App\Models\ProfilePicture;
 use App\Models\SocialSite;
@@ -16,15 +17,16 @@ use App\Models\Service;
 use App\Models\Skill;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Work;
+use App\Models\ContactEmail;
 use App\Models\Contact;
-use App\Models\ContactType;
 
 class BackendController extends Controller {
 	
-//left
+// left
 	public function left(){
-      $data['ProfilePicture'] = ProfilePicture::all();
-      $data['SocialSite'] = SocialSite::all();
+      $data['ProfilePicture'] = ProfilePicture::orderBy('orderBy')->get();
+      $data['SocialSite'] = SocialSite::orderBy('orderBy')->get();
       return view('backend.pages.left', $data);
    }
 
@@ -38,6 +40,9 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
 
+      $id=DB::table('profile_pictures')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+
       $path="profilePicture/";
       if ($request->hasFile('image')){
          if($files=$request->file('image')){
@@ -48,6 +53,7 @@ class BackendController extends Controller {
 
             ProfilePicture::insert([
                'image'=>$imageLink,
+               'orderBy'=>$orderId,
                'status'=>1,
                'created_at' => Carbon::now()
             ]);
@@ -69,11 +75,15 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
+
+      $id=DB::table('social_sites')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
          
       SocialSite::insert([
          'socialLogo'=>$request->socialLogo,
          'socialName'=>$request->socialName,
          'socialUrl'=>$request->socialUrl,
+         'orderBy'=>$orderId,
          'status'=>1,
          'created_at' => Carbon::now()
       ]);      
@@ -100,7 +110,7 @@ class BackendController extends Controller {
    
 // Home
    public function home(){
-      $data['Home'] = Home::all();
+      $data['Home'] = Home::orderBy('orderBy')->get();
       return view('backend.pages.home', $data);
    }
 
@@ -116,6 +126,9 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
 
+      $id=DB::table('homes')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+
       $path="home/";
       if ($request->hasFile('image')){
          if($files=$request->file('image')){
@@ -128,6 +141,7 @@ class BackendController extends Controller {
                'image'=>$imageLink,
                'firstTitle'=>$request->firstTitle,
                'secondTitle'=>$request->secondTitle,
+               'orderBy'=>$orderId,
                'status'=>1,
                'created_at' => Carbon::now()
             ]);
@@ -166,7 +180,7 @@ class BackendController extends Controller {
                'firstTitle'=>$request->firstTitle,
                'secondTitle'=>$request->secondTitle,
             ]);
-            unlink($request->oldImage);
+            (file_exists($request->oldImage) ? unlink($request->oldImage) : '');
          }
       }else{
          Home::where('id', $request->id)->update([
@@ -185,7 +199,7 @@ class BackendController extends Controller {
 
 // Service
    public function services(){
-      $data['Service'] = Service::all();
+      $data['Service'] = Service::orderBy('orderBy')->get();
       return view('backend.pages.services', $data);
    }
 
@@ -200,11 +214,15 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
-      
+
+      $id=DB::table('services')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+
       Service::insert([
          'title'=>$request->title,
          'logo'=>$request->logo,
          'description'=>$request->description,
+         'orderBy'=>$orderId,
          'status'=>1,
          'created_at' => Carbon::now()
       ]);
@@ -237,7 +255,7 @@ class BackendController extends Controller {
       return back()->with('success','Service edit successfully');
    }
 
-//Skill
+// Skill
    public function skills(){
       $data['AnyTitle'] = AnyTitle::where('title', 'aboutSkill')->first();
       $data['Skill'] = Skill::orderBy('orderBy')->get();
@@ -254,8 +272,8 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
-      
-      $id=DB::table('skills')->latest()->first();
+
+      $id=DB::table('skills')->latest('orderBy')->first();
       ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
       
       Skill::insert([
@@ -288,7 +306,7 @@ class BackendController extends Controller {
 
 // Education
    public function education(){
-      $data['Education'] = Education::all();
+      $data['Education'] = Education::orderBy('orderBy')->get();
       return view('backend.pages.education', $data);
    }
 
@@ -303,11 +321,15 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
-      
+
+      $id=DB::table('education')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+ 
       Education::insert([
          'degree'=>$request->degree,
          'date'=>$request->date,
          'description'=>$request->description,
+         'orderBy'=>$orderId,
          'status'=>1,
          'created_at' => Carbon::now()
       ]);         
@@ -341,7 +363,7 @@ class BackendController extends Controller {
 
 // Experience
    public function experience(){
-      $data['Experience'] = Experience::all();
+      $data['Experience'] = Experience::orderBy('orderBy')->get();
       return view('backend.pages.experience', $data);
    }
 
@@ -357,12 +379,16 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
-      
+
+      $id=DB::table('experiences')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+
       Experience::insert([
          'experience'=>$request->experience,
          'startDate'=>$request->startDate,
          'endDate'=>$request->endDate,
          'description'=>$request->description,
+         'orderBy'=>$orderId,
          'status'=>1,
          'created_at' => Carbon::now()
       ]);         
@@ -398,17 +424,122 @@ class BackendController extends Controller {
 
 // Work
    public function work(){
-      return view('backend.pages.work');
+      $data['Work'] = Work::orderBy('orderBy')->get();
+      $data['Skill'] = Skill::orderBy('orderBy')->get();
+      return view('backend.pages.work', $data);
+   }
+
+   public function addWork(Request $request){
+      $validator = Validator::make($request->all(),[
+         'name'=>'required',
+         'image'=>'required',
+         'date'=>'required',
+         'description'=>'required',
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+      
+      $id=DB::table('works')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
+
+      $path="work/";
+      if ($request->hasFile('image')){
+         if($files=$request->file('image')){
+            $picture = $request->image;
+            $fullName=time().".".$picture->getClientOriginalExtension();
+            $files->move(imagePath($path), $fullName);
+            $imageLink = imagePath($path). $fullName;
+
+            Work::insert([
+               'name'=>$request->name,
+               'image'=>$imageLink,
+               'date'=>$request->date,
+               'skill'=>$request->skill,
+               'link'=>$request->link,
+               'github'=>$request->github,
+               'description'=>$request->description,
+               'orderBy'=>$orderId,
+               'status'=>1,
+               'created_at' => Carbon::now()
+            ]);
+         }
+         return back()->with('success', 'Project add successfully'); 
+      } 
+   }
+
+   public function editWork(){
+      $data['Work'] = Work::find($_REQUEST['id']);
+      return view('backend.pages.ajaxView', $data);
+   }
+
+   public function editWork2(Request $request){
+      $validator = Validator::make($request->all(),[
+         'name'=>'required',
+         'date'=>'required',
+         'description'=>'required',
+      ]);
+
+      if($validator->fails()){
+         $messages = $validator->messages(); 
+         return Redirect::back()->withErrors($validator);
+      }
+
+      $path="work/";
+      if ($request->hasFile('image')){
+         if($files=$request->file('image')){
+            $picture = $request->image;
+            $fullName=time().".".$picture->getClientOriginalExtension();
+            $files->move(imagePath($path), $fullName);
+            $imageLink = imagePath($path). $fullName;
+
+            Work::where('id', $request->id)->update([
+               'name'=>$request->name,
+               'image'=>$imageLink,
+               'date'=>$request->date,
+               'skill'=>$request->skill,
+               'link'=>$request->link,
+               'github'=>$request->github,
+               'description'=>$request->description
+            ]);
+            (file_exists($request->oldImage) ? unlink($request->oldImage) : '');
+
+         }
+      }else{
+         Work::where('id', $request->id)->update([
+            'name'=>$request->name,
+            'date'=>$request->date,
+            'skill'=>$request->skill,
+            'link'=>$request->link,
+            'github'=>$request->github,
+            'description'=>$request->description
+         ]);
+      }
+      return back()->with('success', 'Project data edit successfully');
    }
 
 // Contact
    public function contact(){
-      $data['Contact'] = Contact::all();
-      $data['ContactType'] = ContactType::orderBy('orderBy')->get();
+      $data['ContactEmail'] = ContactEmail::where('status', 1)->orderBy('id', 'Desc')->get();
+      $data['Seen'] = ContactEmail::where('status', true)->orderBy('id', 'Desc')->get();
+      $data['Unseen'] = ContactEmail::where('status', false)->orderBy('id', 'Desc')->get();
+     
+      $data['Contact'] = Contact::orderBy('orderBy')->get();
       return view('backend.pages.contact', $data);
    }
 
-   public function addContact(Request $request){
+   public function unseenMail(){
+      $data['ContactEmail'] = ContactEmail::where('status', 0)->orderBy('id', 'Desc')->get();
+      $data['Seen'] = ContactEmail::where('status', true)->orderBy('id', 'Desc')->get();
+      $data['Unseen'] = ContactEmail::where('status', false)->orderBy('id', 'Desc')->get();
+     
+      $data['Contact'] = Contact::orderBy('orderBy')->get();
+      return view('backend.pages.contact', $data);
+   }
+
+   public function addContactEmail(Request $request){
       $validator = Validator::make($request->all(),[
          'name'=>'required',
          'email'=>'required',
@@ -420,12 +551,16 @@ class BackendController extends Controller {
          $messages = $validator->messages(); 
          return Redirect::back()->withErrors($validator);
       }
+
+      $id=DB::table('contact_emails')->latest('orderBy')->first();
+      ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
       
-      Contact::insert([
+      ContactEmail::insert([
          'name'=>$request->name,
          'email'=>$request->email,
          'subject'=>$request->subject,
          'message'=>$request->message,
+         'orderBy'=>$orderId,
          'status'=>false,
          'created_at' => Carbon::now()
       ]);
@@ -433,14 +568,14 @@ class BackendController extends Controller {
       return back()->with('danger', 'Your message send successfully'); 
    }
 
-   public function viewContact(){
-      $data['Contact'] = Contact::find($_REQUEST['id']);
-      $data['Contact']->status = true;     
-      $data['Contact']->save();
+   public function viewContactEmail(){
+      $data['ContactEmail'] = ContactEmail::find($_REQUEST['id']);
+      $data['ContactEmail']->status = true;     
+      $data['ContactEmail']->save();
       return view('backend.pages.ajaxView', $data);
    }
    
-   public function addContactType(Request $request){
+   public function addContact(Request $request){
       $validator = Validator::make($request->all(),[
          'name'=>'required',
          'logo'=>'required',
@@ -452,10 +587,10 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
 
-      $id=DB::table('contact_types')->latest()->first();
+      $id=DB::table('contacts')->latest('orderBy')->first();
       ($id==null) ? $orderId=1 : $orderId=$id->orderBy+1;
       
-      ContactType::insert([
+      Contact::insert([
          'name'=>$request->name,
          'logo'=>$request->logo,
          'details'=>$request->details,
@@ -464,10 +599,10 @@ class BackendController extends Controller {
          'created_at' => Carbon::now()
       ]);
          
-      return back()->with('success', 'Contact type add successfully')->withInput(['tab' => 'contactType']);
+      return back()->with('success', 'Contact add successfully')->withInput(['tab' => 'contactType']);
    }
 
-   public function editContactType(Request $request){
+   public function editContact(Request $request){
       $validator = Validator::make($request->all(),[
          'name'=>'required',
          'logo'=>'required',
@@ -479,7 +614,7 @@ class BackendController extends Controller {
          return Redirect::back()->withErrors($validator);
       }
       
-      ContactType::where('id', $request->id)->update([
+      Contact::where('id', $request->id)->update([
          'name'=>$request->name,
          'logo'=>$request->logo,
          'details'=>$request->details
@@ -487,7 +622,6 @@ class BackendController extends Controller {
          
       return back()->with('success', 'Contact type update successfully')->withInput(['tab' => $request->tab]);
    }
-
    
 // Status [Active vs Inactive]
    public function itemStatus($id, $model, $tab){
@@ -502,7 +636,7 @@ class BackendController extends Controller {
    public function itemDelete($id, $model, $tab){
       $itemId = DB::table($model)->find($id);
       if (Schema::hasColumn($model, 'image')){
-         unlink($itemId->image);
+         ($itemId->image!=null) ? (file_exists($itemId->image) ? unlink($itemId->image) : '') : '';
       }
       DB::table($model)->where('id', $id)->delete();
       return back()->with('success', $model.' delete successfully')->withInput(['tab' => $tab]);
@@ -549,6 +683,5 @@ class BackendController extends Controller {
       DB::table($model)->where('id', $id)->update(['orderBy' => $targetId]);      
       return back()->with('success', $model.' orderBy change')->withInput(['tab' => $tab]);
    }
-
 
 }

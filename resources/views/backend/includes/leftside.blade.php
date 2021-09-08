@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" >
-   <a href="{{url('/admin')}}" class="brand-link bbg-light">
+   <a href="{{url('/index')}}" class="brand-link bbg-light">
       <i lass="nav-icon fas fa-school"></i>
-      <span class="brand-text font-weight-light text-center pl-2">Victory Loves Preparation</span>
+      <span class="brand-text font-weight-light text-center pl-2">Admin Menu</span>
    </a>
    <div class="sidebar">
       <nav class="mt-2">
@@ -58,8 +58,8 @@
 
             <li class="nav-item as-treeview">
                <a href="{{ route('work') }}" class="nav-link {{ (request()->routeIs('work*'))  ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-book"></i>
-                  <p>work</p>
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>Work</p>
                </a>
             </li>
 

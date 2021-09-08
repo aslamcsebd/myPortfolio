@@ -18,6 +18,7 @@ class CreateHomesTable extends Migration
             $table->text('image');
             $table->text('firstTitle', 150);
             $table->text('secondTitle');
+            $table->integer('orderBy');
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();

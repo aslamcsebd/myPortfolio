@@ -63,14 +63,4 @@
          startView: "months", 
          minViewMode: "months"
       });
-
    </script>
-
-<script type="text/javascript">
-   $(".datepicker").datepicker({
-         format: "MM-yyyy",
-         startView: "months", 
-         minViewMode: "months"
-      });
-
-</script>   

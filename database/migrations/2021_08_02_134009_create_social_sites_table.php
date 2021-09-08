@@ -18,6 +18,7 @@ class CreateSocialSitesTable extends Migration
             $table->string('socialLogo', 50);
             $table->string('socialName', 50);
             $table->string('socialUrl', 150);
+            $table->integer('orderBy');
             $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
