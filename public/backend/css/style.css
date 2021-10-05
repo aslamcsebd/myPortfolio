@@ -144,6 +144,8 @@ legend {
    }
 .capitalize{ text-transform: capitalize; }
 .justify{text-align: justify !important;}
+.left{text-align: left !important;}
+.right{text-align: right !important;}
 .alert:first-letter{text-transform: uppercase !important;}
 .form-group { margin-bottom: 0.5rem; }
 .hide{ display: none; }

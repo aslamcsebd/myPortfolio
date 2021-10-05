@@ -14,7 +14,7 @@
          <div class="card-header p-1">
             <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addExperience">Add experience</button>
          </div>
-         <div class="card-body p-1 dataTableHide">
+         <div class="card-body p-1">
             <table class="table table-bordered table-striped table-hover">
                <thead class="text-center">
                   <th>No</th>
@@ -32,8 +32,10 @@
                         <td width="3%">{{$loop->iteration}}</td>
                         <td>{!! $item->experience !!}</td>                        
                         <td width="9%">{!! date('M-Y', strtotime($item->startDate)) !!}</td>
-                        <td width="9%">{!! date('M-Y', strtotime($item->endDate)) !!}</td>
-                        <td width="">{!! $item->description !!}</td>
+                        <td width="9%">
+                           {!! ($item->endDate!=null) ? date('M-Y', strtotime($item->endDate)): 'to now' !!}
+                        </td>
+                        <td class="left" width="">{!! $item->description !!}</td>
                         <td width="8%">
                            <div class="btn-group">
                               <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
@@ -101,7 +103,7 @@
                            </div>
                            <div class="col">
                               <label for="date">End date :</label>
-                              <input type="text" class="form-control datepicker" name="endDate" placeholder="Month-Year" required />
+                              <input type="text" class="form-control datepicker" name="endDate" placeholder="Month-Year"/>
                            </div>
                         </div>                                    
                      </div>

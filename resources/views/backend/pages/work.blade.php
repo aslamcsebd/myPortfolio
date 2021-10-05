@@ -14,7 +14,7 @@
          <div class="card-header p-1">
             <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addWork">Add project</button>
          </div>
-         <div class="card-body p-1 dataTableHide">
+         <div class="card-body p-1">
             <table class="table table-bordered table-striped table-hover">
                <thead class="text-center">
                   <th>No</th>

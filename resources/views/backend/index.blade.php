@@ -8,17 +8,27 @@
       <section class="content mt-4">
          <div class="container-fluid">
             <div class="row">
-
                <div class="col-lg-3 col-6">
                   <div class="small-box bg-info">
                      <div class="inner text-center">
-                        <h3>{{$Home->count()}}</h3>
-                        <p>Left Side</p>
+                        <table class="table">
+                           <tr>
+                              <td><h3 lass="mt-0 mb-0" style="margin:-0.7rem;">{{$profilePicture->count()}}</h3></td> 
+                              <td><h3 lass="mt-0 mb-0" style="margin:-0.7rem;">{{$SocialSite->count()}}</h3></td> 
+                           </tr>
+                           <tr>
+                              <td>Profile Image</td>
+                              <td>Social Site</td>
+                           </tr>
+                           <tr>
+                              <td colspan="2">Left Side</td>
+                           </tr>
+                        </table>
                      </div>
                      <div class="icon">
                         <i class="ion ion-bag"></i>
                      </div>
-                     <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                     <a href="{{ route('left') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>
                </div>
 
@@ -103,11 +113,19 @@
                <div class="col-lg-3 col-6">
                   <div class="small-box bg-dark">
                      <div class="inner text-center">
-                        <h3>{{$Contact->count()}}</h3>
-                        <p>Contact</p>
+                        <table class="table">
+                           <tr>
+                              <td><h3 tyle="margin:-0.7rem;">{{$ContactEmail->count()}}</h3></td> 
+                              <td><h3 tyle="margin:-0.7rem;">{{$Contact->count()}}</h3></td> 
+                           </tr>
+                           <tr>
+                              <td>All Mail</td>
+                              <td>Contact type</td>
+                           </tr>
+                        </table>
                      </div>
-                     <div class="icon">
-                        <i class="ion ion-pie-graph"></i>
+                         <div class="icon">
+                    <i class="ion ion-pie-graph"></i>
                      </div>
                      <a href="{{ route('contact') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                   </div>

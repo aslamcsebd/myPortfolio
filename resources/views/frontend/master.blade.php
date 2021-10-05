@@ -36,6 +36,47 @@
       <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
       <script src="{{ asset('frontend/js/modernizr-2.6.2.min.js') }}"></script>
       <script src="{{ asset('frontend/js/respond.min.js') }}"></script>
+
+
+      <link rel="stylesheet" type="text/css" href="{{ asset('frontend/slick/slick.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ asset('frontend/slick/slick-theme.css') }}">
+   
+   <style type="text/css">
+      
+
+       .slider {
+           width: 100%;
+           margin: 100px auto;
+       }
+
+       .slick-slide {
+         margin: 0px 20px;
+       }
+
+       .slick-slide img {
+         width: 100%;
+       }
+
+       .slick-prev:before,
+       .slick-next:before {
+         color: black;
+       }
+
+
+       .slick-slide {
+         transition: all ease-in-out .3s;
+         opacity: .2;
+       }
+       
+       .slick-active {
+         opacity: .5;
+       }
+
+       .slick-current {
+         opacity: 1;
+       }
+   </style>
+
    </head>
 
    <body>
@@ -50,7 +91,7 @@
       <script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
       <script src="{{ asset('frontend/js/jquery.countTo.js') }}"></script>
       <script src="{{ asset('frontend/js/main.js') }}"></script>
-
+      
       <script type="text/javascript">
          window.setTimeout(function(){
             $(".alert").fadeTo(500, 0).slideUp(500, function(){
@@ -58,5 +99,6 @@
             });
          }, 5000);
       </script>
+
    </body>
 </html>

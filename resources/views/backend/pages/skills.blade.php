@@ -1,7 +1,9 @@
 @extends('backend.master')
+
 @section('title') 
    Skills
 @endsection
+
 @section('content')
    @include('common.alertMessage')
    <div class="content-wrapper p-3">

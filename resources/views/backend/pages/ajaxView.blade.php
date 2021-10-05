@@ -109,7 +109,7 @@
             </div>
             <div class="col">
                <label for="date">End date :</label>
-               <input type="text" class="form-control datepicker" value="{{date('M-Y', strtotime($Experience->endDate))}}" name="endDate" placeholder="Month-Year" required />
+               <input type="text" class="form-control datepicker" value="{!! ($Experience->endDate!=null) ? date('M-Y', strtotime($Experience->endDate)):''!!}" name="endDate" placeholder="Month-Year"/>
             </div>
          </div>                                    
       </div>

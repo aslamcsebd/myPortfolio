@@ -371,7 +371,6 @@ class BackendController extends Controller {
       $validator = Validator::make($request->all(),[
          'experience'=>'required',
          'startDate'=>'required',
-         'endDate'=>'required',
          'description'=>'required'
       ]);
 
@@ -404,7 +403,6 @@ class BackendController extends Controller {
       $validator = Validator::make($request->all(),[
          'experience'=>'required',
          'startDate'=>'required',
-         'endDate'=>'required',
          'description'=>'required'
       ]);
 

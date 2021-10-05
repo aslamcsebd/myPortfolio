@@ -25,7 +25,7 @@ class HomeController extends Controller{
      return view('backend.index');
    }
 
-   public function index(){
+   public function index(Request $request){
       $data['profilePicture'] = ProfilePicture::all();
       $data['SocialSite'] = SocialSite::all();
       
@@ -45,8 +45,17 @@ class HomeController extends Controller{
       $data['Work'] = Work::all();
       
       $data['Contact'] = Contact::all();
-
+      $data['ContactEmail'] = ContactEmail::all();
+   
       return view('backend.index', $data);
+   }
+   
+   public function project(Request $request){
+      $data['profilePicture'] = ProfilePicture::where('status', 1)->orderBy('orderBy')->first();
+      $data['SocialSite'] = SocialSite::where('status', 1)->orderBy('orderBy')->get();
+      $data['Work'] = Work::where('status', 1)->orderBy('orderBy')->get();
+      
+      return view('frontend.project', $data);
    }
    
 }

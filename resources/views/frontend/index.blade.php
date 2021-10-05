@@ -72,30 +72,33 @@
 					</ul>
 				</div>
 			</section>
-			
+
 			<section class="colorlib-about" data-section="about">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12 slides">
 							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="col-md-12">
 									<div class="about-desc">
 										<span class="heading-meta">About Me</span>
 										<h2 class="colorlib-heading">Who Am I?</h2>
-										<p>{{$aboutMe->description!=null ? $aboutMe->description:''}}</p>
+										<p>{!!$aboutMe->description!!}</p>
 									</div>
 								</div>
 							</div>
-							<div class="row">
+
+							<div class="row slide-track">
 								@foreach($Service as $item)
-									<div class="col-md-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}">
+									<div class="col-md-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}"> 
 										<div class="services color-{{rand(1,6)}}">
+											<span class="pull-right">{{$loop->iteration}} of {{$Service->count()}}</span>
 											<span class="icon2">{!!$item->logo!!}</span>
 											<h3>{{$item->title}}</h3>
 										</div>
 									</div>
 								@endforeach								
 							</div>
+
 							<div class="row">
 								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 									<div class="hire" id="navbar" class="collapse">
@@ -111,7 +114,7 @@
 					</div>
 				</div>
 			</section>
-			
+
 			<section class="colorlib-services" data-section="services">
 				<div class="colorlib-narrow-content">
 					<div class="row">
@@ -120,20 +123,22 @@
 							<h2 class="colorlib-heading">Here are some of my expertise</h2>
 						</div>
 					</div>
-					<div class="row row-pt-md">
-						@foreach($Service as $item)						
+					<div class="row row-pt-md slide-track2">
+						@foreach($Service as $item)
 							<div class="col-md-4 text-center animate-box">
 								<div class="services color-{{rand(1,6)}}">
+									<span class="pull-right">{{$loop->iteration}} of {{$Service->count()}}</span>
 									<span class="icon">{!!$item->logo!!}</span>
 									<div class="desc">
 										<h3 class="bg-info mb-0">{{$item->title}}</h3>
 										<p class="bg-dark mb-0">{!!$item->description!!}</p>
 									</div>
 								</div>
+								
 							</div>
 						@endforeach
 					</div>
-				</div>
+				</div>			  
 			</section>
 			
 			<div id="colorlib-counter" class="colorlib-counters" style="background-image: url({{asset('/')}}frontend/images/cover_bg_1.jpg);" data-stellar-background-ratio="0.5">
@@ -175,7 +180,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-							<p>{{$aboutSkill->description!=null ? $aboutSkill->description:''}}</p>
+							<p>{!!$aboutSkill->description!!}</p>
 						</div>
 
 						@foreach($Skill as $item)
@@ -254,7 +259,7 @@
 													<a href="#">{!!$item->experience!!}</a>
 													<span>
 														[{!! date('Y-M', strtotime($item->startDate)) !!} -- 
-														{!! date('Y-M', strtotime($item->endDate)) !!}]
+														{!! ($item->endDate!=null) ? date('Y-M', strtotime($item->endDate)): 'to now' !!}]
 													</span>
 												</h2>
 												{!!$item->description!!}

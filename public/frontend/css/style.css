@@ -133,7 +133,7 @@ figure {
       padding-top: 4em; } }
   #colorlib-aside .author-img {
     width: 150px;
-    height: 150px;
+    height: 155px;
     margin: 0 auto;
     margin-bottom: 10px;
     -webkit-border-radius: 50%;
@@ -232,13 +232,13 @@ figure {
     width: 100%; }
 
    .colorlib-footer ul li:nth-child(odd) a{
-      background: aqua; border-radius: 0px 8px;
+      background: aqua; border-radius: 0px 5px;
    }
    .colorlib-footer ul li:nth-child(even) a{
-      background: aqua; border-radius: 8px 0px;
+      background: aqua; border-radius: 5px 0px;
    }
    .colorlib-footer li a i{
-      margin: 7px; color: darkblue; font-size: 13px;
+      margin: 5px; color: darkblue; font-size: 16px;
    }
    .colorlib-footer li:nth-child(odd) a:hover,
    .colorlib-footer li:nth-child(even) a:hover{
@@ -265,7 +265,7 @@ figure {
         list-style: none; }
         #colorlib-aside .colorlib-footer ul li a {
           color: rgba(255, 255, 255, 0.3);
-          padding: 1px 2px; }
+          padding: 2px 1px; }
           #colorlib-aside .colorlib-footer ul li a:hover, #colorlib-aside .colorlib-footer ul li a:active, #colorlib-aside .colorlib-footer ul li a:focus {
             text-decoration: none;
             outline: none;
@@ -1523,7 +1523,7 @@ body.offcanvas {
 .hide{ display: none; }
 
 /*Title*/
-[title]:hover:after {
+/*[title]:hover:after {
     opacity: 1;
     transition: all 0.1s ease 0.5s;
     visibility: visible;
@@ -1547,4 +1547,42 @@ body.offcanvas {
     z-index: 99999;
     visibility: hidden;
     text-transform: capitalize;
-}
+}*/
+
+/*infinite scroll slider*/
+
+  /* .slide-track{
+      display: flex;
+      width: calc(250px * 10);
+      animation: scroll 30s linear infinite;
+   }
+   .slide-track:hover{
+      animation-play-state: paused;
+   }
+
+   @keyframes scroll{
+      0% {
+        transform: translatex(0);
+      }
+      100%{
+        transform: translatex(calc(-250px * 10));           
+      }
+   }
+
+   .slide-track2{
+      display: flex;
+      width: calc(400px * 10);
+      animation: scroll2 30s linear infinite;
+   }
+   .slide-track2:hover{
+      animation-play-state: paused;
+   }
+   @keyframes scroll2{
+      0% {
+        transform: translatex(0);
+      }
+      100%{
+        transform: translatex(calc(-250px * 10));           
+      }
+   }
+*/

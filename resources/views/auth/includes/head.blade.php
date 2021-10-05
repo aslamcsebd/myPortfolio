@@ -4,7 +4,7 @@
 
    <!-- CSRF Token -->
    <meta name="csrf-token" content="{{ csrf_token() }}">
-   <title>{{ config('app.name', 'Title') }}</title>
+   <title>Login</title>
    <link rel="icon" href="{{ asset('#') }}" type="image/icon type">
 
    <!-- Fonts -->

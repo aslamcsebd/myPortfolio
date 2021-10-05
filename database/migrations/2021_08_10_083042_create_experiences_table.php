@@ -17,7 +17,7 @@ class CreateExperiencesTable extends Migration
             $table->id();
             $table->string('experience', 150);
             $table->string('startDate', 50);
-            $table->string('endDate', 50);
+            $table->string('endDate', 50)->nullable();
             $table->text('description');
             $table->integer('orderBy');
             $table->tinyInteger('status');

@@ -93,3 +93,6 @@ Route::get('/', 'FrontendController@index')->name('home');
 
 // Order Change   
    Route::get('orderBy/{model}/{id}/{targetId}/{tab}','BackendController@orderBy')->name('orderBy');
+
+// All project
+   Route::get('project/', 'HomeController@project')->name('project');

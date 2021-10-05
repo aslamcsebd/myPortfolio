@@ -15,7 +15,7 @@
          <div class="card-header p-1">
             <button class="btn btn-sm btn-success text-light" data-toggle="modal" data-original-title="test" data-target="#addEducation">Add education</button>
          </div>
-         <div class="card-body p-1 dataTableHide">
+         <div class="card-body p-1">
             <table class="table table-bordered table-striped table-hover">
                <thead class="text-center">
                   <th>No</th>
@@ -30,11 +30,11 @@
                   @foreach($Education as $item)
                      <tr>
                         <td width="3%">{{$loop->iteration}}</td>
-                        <td>{!! $item->degree !!}</td>                        
+                        <td class="left">{!! $item->degree !!}</td>                        
                         <td width="13%">{!! date('Y-M', strtotime($item->date)) !!} <br>
                            [{{\Carbon\Carbon::parse($item->date)->diffForHumans()}}]
                         </td>
-                        <td>{!! $item->description !!}</td>
+                        <td class="left">{!! $item->description !!}</td>
                         <td width="8%">
                            <div class="btn-group">
                               <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
