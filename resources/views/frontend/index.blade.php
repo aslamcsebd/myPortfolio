@@ -27,7 +27,7 @@
 						<li><a href="#" data-nav-section="skills">Skills</a></li>
 						<li><a href="#" data-nav-section="education">Education</a></li>
 						<li><a href="#" data-nav-section="experience">Experience</a></li>
-						<li><a href="#" data-nav-section="work">Work</a></li>
+						<li><a href="#" data-nav-section="work">Project</a></li>
 						<li><a href="#" data-nav-section="contact">Contact</a></li>
 					</ul>
 				</div>
@@ -90,7 +90,7 @@
 							<div class="row slide-track">
 								@foreach($Service as $item)
 									<div class="col-md-3 animate-box" data-animate-effect="{{$effect[rand(0, 3)]}}"> 
-										<div class="services color-{{rand(1,6)}}">
+										<div class="services olor-{{rand(1,6)}} my-4">
 											<span class="pull-right">{{$loop->iteration}} of {{$Service->count()}}</span>
 											<span class="icon2">{!!$item->logo!!}</span>
 											<h3>{{$item->title}}</h3>
@@ -98,11 +98,17 @@
 									</div>
 								@endforeach								
 							</div>
+							<?php
+						        $conn	=	mysqli_connect('localhost', 'pltvjbxn', 'rDm0QH12n@)0Du', 'pltvjbxn_portfolio');
+								$sql	=   "select * from other_projects";
+								$result =	mysqli_query($conn, $sql);
+								$small 	=	mysqli_num_rows($result);
+						    ?>
 
 							<div class="row">
 								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 									<div class="hire" id="navbar" class="collapse">
-										<h2>I am happy to know you that {{$Work->count()}}+ projects done sucessfully!</h2>
+										<h2>I am happy to know you that {{$Work->count() + $small}}+ projects done sucessfully!</h2>
 										<a href="#" data-nav-section="contact" class="btn-hire">Hire me</a>
 										<p class="pull-right">
 											<a href="#" data-nav-section="contact" class="btn-hire">Contact me</a>
@@ -125,16 +131,15 @@
 					</div>
 					<div class="row row-pt-md slide-track2">
 						@foreach($Service as $item)
-							<div class="col-md-4 text-center animate-box">
-								<div class="services color-{{rand(1,6)}}">
+							<div class="col-md-4 text-center animate-box my-2">
+								<div class="services olor-{{rand(1,6)}}">
 									<span class="pull-right">{{$loop->iteration}} of {{$Service->count()}}</span>
 									<span class="icon">{!!$item->logo!!}</span>
 									<div class="desc">
-										<h3 class="bg-info mb-0">{{$item->title}}</h3>
+										<h3 class="bg-info">{{$item->title}}</h3>
 										<p class="bg-dark mb-0">{!!$item->description!!}</p>
 									</div>
-								</div>
-								
+								</div>								
 							</div>
 						@endforeach
 					</div>
@@ -285,12 +290,12 @@
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<span class="heading-meta">My Work</span>
+							<span class="heading-meta">My project</span>
 							<h2 class="colorlib-heading animate-box">Recent Work</h2>
 						</div>
 					</div>
 						
-					<fieldset>
+					{{-- <fieldset>
 						<legend>Project List [{{$Work->count()}}]</legend>
 						<div class="work" style="height:300px;">
 						  	<ul class="nav nav-tabs col-md-4" role="tablist">
@@ -355,8 +360,31 @@
 
 						  	</div>
 						</div>
+					</fieldset> --}}
+
+					<fieldset class="form-group">
+						<legend class="mb-0">Project list ({{$Work->count()+$small}})</legend>
+						<div style="padding: 10px;">
+							@foreach($Work as $item)
+								<a class="form-control btn link projectLink"
+									target="_blank" 
+									href="{{ ($item->link!=null) ? $item->link : $item->github }}" 
+									title="See this project">
+									{{ $item->name }}
+								</a>
+							@endforeach
+							<a class="form-control btn link projectLink otherProject" 
+								target="_blank"
+								href="https://other.aslambd.com/"
+								title="See other project">
+								See other projects ({{$small}})
+							</a>
+						</div>
 					</fieldset>
 
+					<span class="text-center">
+						<a href="https://www.aslambd.com/project" target="_blank" class="btn btn-outline-danger">See all projects</a>
+					</span>
 				</div>
 			</section>
 
